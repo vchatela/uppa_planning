@@ -13,6 +13,7 @@
     <string name="btn_ok">OK</string>
     <string name="btn_continue">Continuer</string>
     <string name="promo"> Aucune promo selectionné. Menu > Réglages</string>
-    
+    <string name="Refresh">Refresh</string>
+    <string name="Export">Export</string>
 
 </resources>

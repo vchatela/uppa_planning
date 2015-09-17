@@ -67,7 +67,6 @@ public class Promotion implements Serializable{
 	}
 	@Override
 	public boolean equals(Object o) {
-		// TODO Auto-generated method stub
 		if( o instanceof Promotion){
 			if (((Promotion)o).getCode().equalsIgnoreCase(this.code))
 					return true;

@@ -1,0 +1,6 @@
+out\*
+.idea\*
+bin\*
+out/*
+.idea/*
+bin/*

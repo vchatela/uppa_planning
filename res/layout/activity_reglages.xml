@@ -31,12 +31,18 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
-        android:id="@+id/button_ok"
+        android:id="@+id/CacheAllowed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView_title"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/textView_title"
         android:text="@string/btn_ok" />
+    <CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="Autorisez vous le cache ?" android:id="@+id/checkBox2"
+              android:checked="true" android:layout_below="@+id/spinner_reglages"
+              android:layout_centerHorizontal="true"/>
+    <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Reset Cache"
+            android:id="@+id/resetCache" android:layout_below="@+id/checkBox2" android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

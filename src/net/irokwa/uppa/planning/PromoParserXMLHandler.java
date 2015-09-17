@@ -22,7 +22,7 @@ public class PromoParserXMLHandler extends DefaultHandler {
 	// Array list de feeds
 	private ArrayList entries;
 
-	// Boolean permettant de savoir si nous sommes � l'int�rieur d'un item
+	// Boolean permettant de savoir si nous sommes à l'intérieur d'un item
 	private boolean inItem, shouldOk = false;
 
 	// Feed courant
@@ -40,12 +40,12 @@ public class PromoParserXMLHandler extends DefaultHandler {
 		super();
 	}
 
-	// * Cette m�thode est appel�e par le parser une et une seule
-	// * fois au d�marrage de l'analyse de votre flux xml.
-	// * Elle est appel�e avant toutes les autres m�thodes de l'interface,
-	// * � l'exception unique, �videmment, de la m�thode setDocumentLocator.
-	// * Cet �v�nement devrait vous permettre d'initialiser tout ce qui doit
-	// * l'�tre avant led�but du parcours du document.
+	// * Cette méthode est appelée par le parser une et une seule
+	// * fois au démarrage de l'analyse de votre flux xml.
+	// * Elle est appelée avant toutes les autres méthodes de l'interface,
+	// * à l'exception unique, évidemment, de la méthode setDocumentLocator.
+	// * Cet événement devrait vous permettre d'initialiser tout ce qui doit
+	// * l'étre avant le début du parcours du document.
 
 	@Override
 	public void startDocument() throws SAXException {
@@ -55,23 +55,23 @@ public class PromoParserXMLHandler extends DefaultHandler {
 	}
 
 	/*
-	 * Fonction �tant d�clench�e lorsque le parser trouve un tag XML
-	 * C'est cette m�thode que nous allons utiliser pour instancier un nouveau feed
+	 * Fonction étant déclenchée lorsque le parser trouve un tag XML
+	 * C'est cette méthode que nous allons utiliser pour instancier un nouveau feed
  	*/
 	@Override
 	public void startElement(String uri, String localName, String name,	Attributes attributes) throws SAXException {
-		// Nous r�initialisons le buffer a chaque fois qu'il rencontre un item
+		// Nous réinitialisons le buffer a chaque fois qu'il rencontre un item
 		buffer = new StringBuffer();		
 
-		// Ci dessous, localName contient le nom du tag rencontr�
+		// Ci dessous, localName contient le nom du tag rencontré
 
-		// Nous avons rencontr� un tag ITEM, il faut donc instancier un nouveau feed
+		// Nous avons rencontré un tag ITEM, il faut donc instancier un nouveau feed
 		if (localName.equalsIgnoreCase(PERIODE)){
 			this.currentFeed = new Periode();
 			inItem = true;
 		}
 
-		// Vous pouvez d�finir des actions � effectuer pour chaque item rencontr�
+		// Vous pouvez définir des actions à effectuer pour chaque item rencontré
 		if (localName.equalsIgnoreCase(CODE)){
 			// Nothing to do
 		}
@@ -84,11 +84,11 @@ public class PromoParserXMLHandler extends DefaultHandler {
 
 	}
 
-	// * Fonction �tant d�clench�e lorsque le parser � pars�
-	// * l'int�rieur de la balise XML La m�thode characters
-	// * a donc fait son ouvrage et tous les caract�re inclus
-	// * dans la balise en cours sont copi�s dans le buffer
-	// * On peut donc tranquillement les r�cup�rer pour compl�ter
+	// * Fonction étant déclenchée lorsque le parser a parsé
+	// * l'intérieur de la balise XML. La méthode characters
+	// * a donc fait son ouvrage et tous les caractére inclus
+	// * dans la balise en cours sont copiés dans le buffer
+	// * On peut donc tranquillement les récupérer pour compléter
 	// * notre objet currentFeed
 
 	@Override
@@ -128,9 +128,9 @@ public class PromoParserXMLHandler extends DefaultHandler {
 	}
 
 	// * Tout ce qui est dans l'arborescence mais n'est pas partie
-	// * int�grante d'un tag, d�clenche la lev�e de cet �v�nement.
-	// * En g�n�ral, cet �v�nement est donc lev� tout simplement
-	// * par la pr�sence de texte entre la balise d'ouverture et
+	// * intégrante d'un tag, déclenche la levée de cet événement.
+	// * En général, cet événement est donc levé tout simplement
+	// * par la présence de texte entre la balise d'ouverture et
 	// * la balise de fermeture
 
 	public void characters(char[] ch,int start, int length)	throws SAXException{
@@ -138,7 +138,7 @@ public class PromoParserXMLHandler extends DefaultHandler {
 		if(buffer != null) buffer.append(lecture);
 	}
 
-	// cette m�thode nous permettra de r�cup�rer les donn�es
+	// cette méthode nous permettra de récupérer les données
 	public ArrayList getData(){
 		return entries;
 	}

@@ -22,9 +22,7 @@ public class MyXMLParser {
 
 		static public Context context;
 
-
-
-		public static ArrayList<Periode> getPromo(String code, InputStream input) throws SAXException, IOException{
+		public static ArrayList<Periode> getPromo(InputStream input) throws SAXException, IOException{
 			// On passe par une classe factory pour obtenir une instance de sax
 			SAXParserFactory fabrique = SAXParserFactory.newInstance();
 			SAXParser parseur = null;
@@ -37,21 +35,19 @@ public class MyXMLParser {
 			} catch (SAXException e) {
 				e.printStackTrace();
 			}
-
 			
 			/*
-			 * Le handler sera gestionnaire du fichier XML c'est � dire que c'est lui qui sera charg�
-			 * des op�rations de parsing. On vera cette classe en d�tails ci apr�s.
+			 * Le handler sera gestionnaire du fichier XML c'est à dire que c'est lui qui sera chargé
+			 * des opérations de parsing. On vera cette classe en détails ci aprés.
 			*/
 			DefaultHandler handler = new PromoParserXMLHandler();
 			try {
 				// On parse le fichier XML
-				
 				if(input==null)
-					Log.e("erreur android","null");
+					Log.e("ERROR","Parsing inputStream null");
 				else{
 					parseur.parse(input, handler);
-					// On r�cup�re directement la liste des feeds
+					// On récupére directement la liste des feeds
 					entries = ((PromoParserXMLHandler) handler).getData();
 					if (!((PromoParserXMLHandler)handler).shouldBeOk() )
 						entries = null;
@@ -61,8 +57,6 @@ public class MyXMLParser {
 			} catch (IOException e) {
 				throw e;
 			}
-
-			// On la retourne l'array list
 			return entries;
 		}
 
@@ -80,12 +74,9 @@ public class MyXMLParser {
 				e.printStackTrace();
 			}
 
-			
-
-			
 			/*
-			 * Le handler sera gestionnaire du fichier XML c'est � dire que c'est lui qui sera charg�
-			 * des op�rations de parsing. On vera cette classe en d�tails ci apr�s.
+			 * Le handler sera gestionnaire du fichier XML c'est à dire que c'est lui qui sera chargé
+			 * des opérations de parsing. On vera cette classe en détails ci aprés.
 			*/
 			DefaultHandler handler = new PromoListParserXMLHandler();
 			try {
@@ -95,7 +86,7 @@ public class MyXMLParser {
 					Log.e("erreur android","null");
 				else{
 					parseur.parse(input, handler);
-					// On r�cup�re directement la liste des feeds
+					// On récupère directement la liste des feeds
 					entries = ((PromoListParserXMLHandler) handler).getData();
 					if (!((PromoListParserXMLHandler)handler).shouldBeOk() )
 						entries = null;
@@ -105,9 +96,6 @@ public class MyXMLParser {
 			} catch (IOException e) {
 				throw e;
 			}
-
-
-			// On la retourne l'array list
 			return entries;
 		}
 

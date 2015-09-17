@@ -53,7 +53,7 @@ public class Periode implements Serializable {
 	private void computeDates() {
 		ArrayList<String> months = new ArrayList<String>();
 		months.add("janvier");
-		months.add("f�vrier");
+		months.add("février");
 		months.add("mars");
 		months.add("avril");
 		months.add("mai");
@@ -63,12 +63,11 @@ public class Periode implements Serializable {
 		months.add("septembre");
 		months.add("octobre");
 		months.add("novembre");
-		months.add("d�cembre");
+		months.add("décembre");
 
 		LinkedList<String> liste = new LinkedList<String>();
 		StringTokenizer st = new StringTokenizer(this.label, " ");
 		while (st.hasMoreTokens()) {
-
 			liste.add(st.nextToken());
 		}
 
@@ -145,11 +144,6 @@ public class Periode implements Serializable {
 	}
 	@Override
 	public String toString() {
-//		String value = "[ Periode: " +label + ", code:" + code  + ", Legendes: "+ legendes.size() + "</br>\n";
-//		for (String leg : legendes) {
-//			value += leg + "</br>\n";
-//		}
-//		return value + "]</br>\n";
 		return label;
 	}
 	public String toHtml(){
@@ -160,5 +154,4 @@ public class Periode implements Serializable {
 		Html += "</div></body></html>";
 		return Html;
 	}
-
 }

@@ -6,13 +6,11 @@ import org.xml.sax.SAXException;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.widget.Switch;
 
 public class ErrorHandler {
-	private final static String NET = "Connectivité réseau.";
-	private final static String PARSE = "Données reçut corrompues.";
+	private final static String NET = "Connectivité réseau - Pensez a autoriser le cache.";
+	private final static String PARSE = "Données reçues corrompues.";
 	private final static String PROXY = "Impossible de récupérer le planning. Si vous étes sur un hot-spot Wifi, vérifiez que vous êtes bien identifié.";
 
 	private Activity context;
@@ -31,7 +29,8 @@ public class ErrorHandler {
 		// set dialog message
 		if (e instanceof IOException)
 			alertDialogBuilder.setMessage(NET);
-		
+		if(e instanceof CacheException)
+            alertDialogBuilder.setMessage(e.toString());
 		if (e instanceof SAXException)
 			alertDialogBuilder.setMessage(PROXY);
 		if (e instanceof ProxyException)
@@ -42,7 +41,6 @@ public class ErrorHandler {
 		alertDialogBuilder.setPositiveButton("Quiter",
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
-
 						context.finish();
 					}
 				});
@@ -66,7 +64,17 @@ class ProxyException extends Exception {
 	/**
 	 * 
 	 */
-	
-	
-	
+}
+
+class CacheException extends Exception {
+	private String info;
+
+	CacheException(String message){
+		info = message;
+	}
+
+	@Override
+	public String toString() {
+		return info;
+	}
 }

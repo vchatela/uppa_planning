@@ -47,7 +47,7 @@ public class HttpConnection {
 
 				stringBuffer.append(ligne);
 
-				// Android 2.3 et sup�rieur
+				// Android 2.3 et supérieur
 				if (!bufferedReader.ready()) {
 					break;
 				}
