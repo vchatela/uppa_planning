@@ -9,115 +9,118 @@ import java.net.URL;
 import java.util.Calendar;
 
 
-
 public class HttpConnection {
-	private HttpURLConnection http;
-	private boolean error;
-	
-	public boolean isError() {
-		return error;
-	}
-	public void setError(boolean error) {
-		this.error = error;
-	}
-	public HttpConnection() {
-		this.error = false;
-	}
-	public String getContent(String url) {
+    private HttpURLConnection http;
+    private boolean error;
 
-		String tmp = "";
-		try {
+    public boolean isError() {
+        return error;
+    }
 
-			URL urlPage = new URL(url);
+    public void setError(boolean error) {
+        this.error = error;
+    }
 
-			HttpURLConnection connection = (HttpURLConnection) urlPage
-					.openConnection();
+    public HttpConnection() {
+        this.error = false;
+    }
 
-			
-			InputStream inputStream = connection.getInputStream();
+    public String getContent(String url) {
 
-			BufferedReader bufferedReader = new BufferedReader(
-					new InputStreamReader(inputStream));
+        String tmp = "";
+        try {
 
-			StringBuffer stringBuffer = new StringBuffer();
+            URL urlPage = new URL(url);
 
-			String ligne;
+            HttpURLConnection connection = (HttpURLConnection) urlPage
+                    .openConnection();
 
-			while ((ligne = bufferedReader.readLine()) != null) {
 
-				stringBuffer.append(ligne);
+            InputStream inputStream = connection.getInputStream();
 
-				// Android 2.3 et supérieur
-				if (!bufferedReader.ready()) {
-					break;
-				}
+            BufferedReader bufferedReader = new BufferedReader(
+                    new InputStreamReader(inputStream));
 
-			}
+            StringBuffer stringBuffer = new StringBuffer();
 
-			tmp = stringBuffer.toString();
+            String ligne;
 
-			connection.disconnect();
+            while ((ligne = bufferedReader.readLine()) != null) {
 
-			bufferedReader.close();
+                stringBuffer.append(ligne);
 
-			inputStream.close();
-			
-			
+                // Android 2.3 et supérieur
+                if (!bufferedReader.ready()) {
+                    break;
+                }
 
-		} catch (IOException e) {
-			this.setError(true);
-			e.printStackTrace();
-			return null;
+            }
 
-		}
-		this.setError(false);
-		return tmp;
+            tmp = stringBuffer.toString();
 
-	}
-	public int getContentLenght(String url) {
-		
-		int conLen = 0;
-		try {
+            connection.disconnect();
 
-			URL urlPage = new URL(url);
+            bufferedReader.close();
 
-			HttpURLConnection connection = (HttpURLConnection) urlPage
-					.openConnection();
+            inputStream.close();
 
-			conLen = connection.getContentLength();
 
-			connection.disconnect();
+        } catch (IOException e) {
+            this.setError(true);
+            e.printStackTrace();
+            return null;
 
-		} catch (IOException e) {
-			this.setError(true);
-			e.printStackTrace();
-			return 0;
+        }
+        this.setError(false);
+        return tmp;
 
-		}
-		this.setError(false);
-		return conLen;
-	}
-	public Calendar getLastModified(String url){
-		Calendar lastMod = Calendar.getInstance();
-		try {
+    }
 
-			URL urlPage = new URL(url);
+    public int getContentLenght(String url) {
 
-			HttpURLConnection connection = (HttpURLConnection) urlPage
-					.openConnection();
+        int conLen = 0;
+        try {
 
-			lastMod.setTimeInMillis(connection.getLastModified());
+            URL urlPage = new URL(url);
 
-			connection.disconnect();
+            HttpURLConnection connection = (HttpURLConnection) urlPage
+                    .openConnection();
 
-		} catch (IOException e) {
-			this.setError(true);
-			e.printStackTrace();
-			return lastMod;
+            conLen = connection.getContentLength();
 
-		}
-		this.setError(false);
-		return lastMod;
-	}
-	
+            connection.disconnect();
+
+        } catch (IOException e) {
+            this.setError(true);
+            e.printStackTrace();
+            return 0;
+
+        }
+        this.setError(false);
+        return conLen;
+    }
+
+    public Calendar getLastModified(String url) {
+        Calendar lastMod = Calendar.getInstance();
+        try {
+
+            URL urlPage = new URL(url);
+
+            HttpURLConnection connection = (HttpURLConnection) urlPage
+                    .openConnection();
+
+            lastMod.setTimeInMillis(connection.getLastModified());
+
+            connection.disconnect();
+
+        } catch (IOException e) {
+            this.setError(true);
+            e.printStackTrace();
+            return lastMod;
+
+        }
+        this.setError(false);
+        return lastMod;
+    }
+
 }

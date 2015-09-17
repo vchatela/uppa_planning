@@ -251,7 +251,7 @@ public class MainActivity extends Activity implements OnClickListener,
                 updateWebView(getApplicationContext(), webView, ((Periode) spPeriodes.getSelectedItem()).getImageCode(), extension.png);
             } catch (CacheException cacheException) {
                 cacheException.printStackTrace();
-                Toast.makeText(null,"Impossible de charger le fichier.",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Impossible de charger le fichier.",Toast.LENGTH_LONG).show();
             }
             return;
         } else {
@@ -300,7 +300,12 @@ public class MainActivity extends Activity implements OnClickListener,
                 loadView(true);
                 break;
             case R.id.exportButton:
-                exportCurrentView(getApplicationContext(),((Periode) spPeriodes.getSelectedItem()).getImageCode() + "." + extension.png);
+                if(exportCurrentView(getApplicationContext(),((Periode) spPeriodes.getSelectedItem()).getImageCode() + "." + extension.png)==0){
+                    Toast.makeText(getApplicationContext(),"Sauvegardé dans \"Documents\".",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"Erreur durant la sauvegarde.",Toast.LENGTH_LONG).show();
+                }
                 break;
         }
     }
