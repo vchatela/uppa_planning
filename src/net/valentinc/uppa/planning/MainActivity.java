@@ -1,4 +1,4 @@
-package net.irokwa.uppa.planning;
+package net.valentinc.uppa.planning;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -25,8 +25,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-import static net.irokwa.uppa.planning.Cache.*;
-import static net.irokwa.uppa.planning.Export.exportCurrentView;
+import static net.valentinc.uppa.planning.Cache.*;
+import static net.valentinc.uppa.planning.Export.exportCurrentView;
 
 public class MainActivity extends Activity implements OnClickListener,
         OnItemSelectedListener {

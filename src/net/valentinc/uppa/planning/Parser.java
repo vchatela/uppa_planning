@@ -1,7 +1,6 @@
-package net.irokwa.uppa.planning;
+package net.valentinc.uppa.planning;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

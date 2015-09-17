@@ -1,4 +1,4 @@
-package net.irokwa.uppa.planning;
+package net.valentinc.uppa.planning;
 
 import java.io.BufferedReader;
 import java.io.IOException;
