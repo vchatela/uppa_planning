@@ -1,8 +1,7 @@
-package net.irokwa.uppa.planning;
+package net.valentinc.uppa.planning;
 
 import android.content.Context;
 import android.os.Environment;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;

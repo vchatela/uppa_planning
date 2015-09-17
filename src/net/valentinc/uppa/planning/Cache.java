@@ -1,4 +1,4 @@
-package net.irokwa.uppa.planning;
+package net.valentinc.uppa.planning;
 
 import android.content.Context;
 import android.util.Log;

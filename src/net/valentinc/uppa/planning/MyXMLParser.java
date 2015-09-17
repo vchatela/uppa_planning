@@ -1,10 +1,7 @@
-package net.irokwa.uppa.planning;
+package net.valentinc.uppa.planning;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -15,7 +12,6 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
 import android.util.Log;
 
 public class MyXMLParser {

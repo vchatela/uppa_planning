@@ -1,4 +1,4 @@
-package net.irokwa.uppa.planning;
+package net.valentinc.uppa.planning;
 
 
 import java.util.ArrayList;
@@ -7,28 +7,25 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-public class PromoParserXMLHandler extends DefaultHandler {
+public class PromoListParserXMLHandler extends DefaultHandler {
 
 	// nom des tags XML
-	private final String PERIODE = "periode";
-	private final String CODE = "code";
-	private final String DATE = "date";
-	private final String LEGENDE = "legende";
-	private final String LEGENDES = "legendes";
-	private final String CREATOR = "creator";
-	private final String DESCRIPTION = "description";
+	private final String PROMO = "promotion";
 	private final String LAST = "lastupdate";
+	private final String CODE = "code";
+	private final String NOM = "nom";
 
+	private boolean shouldOk = false;
 	// Array list de feeds
-	private ArrayList entries;
+	private ArrayList<Promotion> entries;
 
 	// Boolean permettant de savoir si nous sommes à l'intérieur d'un item
-	private boolean inItem, shouldOk = false;
+	private boolean inItem;
 
 	// Feed courant
-	private Periode currentFeed;
+	private Promotion currentFeed;
 
-	// Buffer permettant de contenir les donn�es d'un tag XML
+	// Buffer permettant de contenir les données d'un tag XML
 	private StringBuffer buffer;
 
 	@Override
@@ -36,7 +33,11 @@ public class PromoParserXMLHandler extends DefaultHandler {
 		super.processingInstruction(target, data);
 	}
 
-	public PromoParserXMLHandler() {
+	public boolean shouldBeOk() {
+		return shouldOk;
+	} 
+	
+	public PromoListParserXMLHandler() {
 		super();
 	}
 
@@ -45,12 +46,12 @@ public class PromoParserXMLHandler extends DefaultHandler {
 	// * Elle est appelée avant toutes les autres méthodes de l'interface,
 	// * à l'exception unique, évidemment, de la méthode setDocumentLocator.
 	// * Cet événement devrait vous permettre d'initialiser tout ce qui doit
-	// * l'étre avant le début du parcours du document.
+	// * l'étre avant ledébut du parcours du document.
 
 	@Override
 	public void startDocument() throws SAXException {
 		super.startDocument();
-		entries = new ArrayList<Periode>();
+		entries = new ArrayList<Promotion>();
 
 	}
 
@@ -66,8 +67,8 @@ public class PromoParserXMLHandler extends DefaultHandler {
 		// Ci dessous, localName contient le nom du tag rencontré
 
 		// Nous avons rencontré un tag ITEM, il faut donc instancier un nouveau feed
-		if (localName.equalsIgnoreCase(PERIODE)){
-			this.currentFeed = new Periode();
+		if (localName.equalsIgnoreCase(PROMO)){
+			this.currentFeed = new Promotion();
 			inItem = true;
 		}
 
@@ -75,17 +76,10 @@ public class PromoParserXMLHandler extends DefaultHandler {
 		if (localName.equalsIgnoreCase(CODE)){
 			// Nothing to do
 		}
-		if (localName.equalsIgnoreCase(DATE)){
-			// Nothing to do
-		}
-		if (localName.equalsIgnoreCase(LEGENDE)){
-			// Nothing to do
-		}
-
 	}
 
-	// * Fonction étant déclenchée lorsque le parser a parsé
-	// * l'intérieur de la balise XML. La méthode characters
+	// * Fonction étant déclenchée lorsque le parseràparsé
+	// * l'intérieur de la balise XML La méthode characters
 	// * a donc fait son ouvrage et tous les caractére inclus
 	// * dans la balise en cours sont copiés dans le buffer
 	// * On peut donc tranquillement les récupérer pour compléter
@@ -96,25 +90,19 @@ public class PromoParserXMLHandler extends DefaultHandler {
 
 		if (localName.equalsIgnoreCase(CODE)){
 			if(inItem){
-				// Les caract�res sont dans l'objet buffer
-				this.currentFeed.setImageCode(buffer.toString());
+				// Les caractéres sont dans l'objet buffer
+				this.currentFeed.setCode(buffer.toString());
 				buffer = null;
 			}
 		}
-		if (localName.equalsIgnoreCase(DATE)){
+		if (localName.equalsIgnoreCase(NOM)){
 			if(inItem){
-				this.currentFeed.setStrDate(buffer.toString());
-				buffer = null;
-			}
-		}
-		if (localName.equalsIgnoreCase(LEGENDE)){
-			if(inItem){
-				this.currentFeed.addLegende(buffer.toString());
+				this.currentFeed.setName(buffer.toString());
 				buffer = null;
 			}
 		}
 
-		if (localName.equalsIgnoreCase(PERIODE)){
+		if (localName.equalsIgnoreCase(PROMO)){
 			entries.add(currentFeed);
 			inItem = false;
 		}
@@ -122,9 +110,6 @@ public class PromoParserXMLHandler extends DefaultHandler {
 			shouldOk = true;
 			
 		}
-	}
-	public boolean shouldBeOk() {
-		return shouldOk;
 	}
 
 	// * Tout ce qui est dans l'arborescence mais n'est pas partie
@@ -139,7 +124,7 @@ public class PromoParserXMLHandler extends DefaultHandler {
 	}
 
 	// cette méthode nous permettra de récupérer les données
-	public ArrayList getData(){
+	public ArrayList<Promotion> getData(){
 		return entries;
 	}
 }
