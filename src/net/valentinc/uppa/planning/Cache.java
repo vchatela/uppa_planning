@@ -87,7 +87,6 @@ public abstract class Cache {
     public static boolean DoesFileExist(Context context, String nameOfFile,extension e){
         String path = context.getCacheDir().getAbsolutePath() + File.separator;
         String CurrentPath = path+nameOfFile+'.'+e;
-        //GetListOfFileInFolder(context,context.getCacheDir());
         File file = new File(CurrentPath);
         Log.i("INFO", "File exists : " + file.exists());
         return file.exists();
@@ -97,43 +96,14 @@ public abstract class Cache {
         Log.i("INFO", "Number of file " + context.getApplicationContext().getCacheDir().listFiles().length);
         for(File file : context.getApplicationContext().getCacheDir().listFiles()){
             Log.i("INFO", "Will delete : " + file.getName());
-            file.delete();
+            try{
+                file.delete();
+            }catch (Exception e){
+                Log.e("Error","Error during deletion");
+            }
+
             Log.i("INFO", "File deleted :" + file.getName());
         }
         Log.i("INFO", "End Reset Cache ");
-    }
-
-    public static boolean isEqual(InputStream i1, InputStream i2)
-            throws IOException {
-
-        ReadableByteChannel ch1 = Channels.newChannel(i1);
-        ReadableByteChannel ch2 = Channels.newChannel(i2);
-
-        ByteBuffer buf1 = ByteBuffer.allocateDirect(1024);
-        ByteBuffer buf2 = ByteBuffer.allocateDirect(1024);
-
-        try {
-            while (true) {
-
-                int n1 = ch1.read(buf1);
-                int n2 = ch2.read(buf2);
-
-                if (n1 == -1 || n2 == -1) return n1 == n2;
-
-                buf1.flip();
-                buf2.flip();
-
-                for (int i = 0; i < Math.min(n1, n2); i++)
-                    if (buf1.get() != buf2.get())
-                        return false;
-
-                buf1.compact();
-                buf2.compact();
-            }
-
-        } finally {
-            if (i1 != null) i1.close();
-            if (i2 != null) i2.close();
-        }
     }
 }
