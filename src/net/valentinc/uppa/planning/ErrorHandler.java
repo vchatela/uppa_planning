@@ -56,14 +56,7 @@ public class ErrorHandler {
 
 }
 class ProxyException extends Exception {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	/**
-	 * 
-	 */
 }
 
 class CacheException extends Exception {

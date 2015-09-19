@@ -13,7 +13,6 @@ public abstract class Export {
 
     public static int exportCurrentView(Context context, String imageName){
         //copy file from cache to ... For the moment only Documents Folder
-        //nom fichier ((Periode) spPeriodes.getSelectedItem()).getImageCode() + "." + extension.png
         File file = new File(context.getCacheDir().getAbsolutePath() + File.separator + imageName);
         if(!file.exists()){
             return -1;

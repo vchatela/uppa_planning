@@ -45,7 +45,6 @@ public class MainActivity extends Activity implements OnClickListener,
     private ArrayList<Promotion> promoList;
     private ProgressDialog progressBar;
     private Handler progressBarHandler = new Handler();
-    private boolean CacheAllowed = true;
     private ArrayList<String> files;
     private ArrayList<Periode> periodeList;
 
@@ -64,14 +63,13 @@ public class MainActivity extends Activity implements OnClickListener,
         // Initialisation des elements UI
         this.tvPromo = (TextView) findViewById(R.id.tv_promo);
         this.spPeriodes = (Spinner) findViewById(R.id.spinner1);
-        this.bSettings = (ImageButton) findViewById(R.id.imageButton1);
+        this.bSettings = (ImageButton) findViewById(R.id.settings);
         this.webView = (WebView) findViewById(R.id.webView1);
         this.webView.getSettings().setBuiltInZoomControls(true);
         this.webView.getSettings().setUseWideViewPort(true);
         this.bSettings.setOnClickListener(this);
         findViewById(R.id.refreshButton).setOnClickListener(this);
         findViewById(R.id.exportButton).setOnClickListener(this);
-        // TODO findViewById(R.id.resetCache).setOnClickListener(this);
         this.spPeriodes.setOnItemSelectedListener(this);
 
         // Lecture des pref
@@ -117,8 +115,10 @@ public class MainActivity extends Activity implements OnClickListener,
                 try {
                     url = new URL("http://www.irokwa.net/uppa/hp/promo-"
                             + MainActivity.this.thePromo.getCode() + ".xml");
+                    //TODO : add string to enum URL + %s
                     urlList = new URL(
                             "http://www.irokwa.net/uppa/hp/promolist.xml");
+                    
 
                 } catch (MalformedURLException e1) {
                     e1.printStackTrace();
@@ -136,12 +136,7 @@ public class MainActivity extends Activity implements OnClickListener,
                         connected = false;
                         MainActivity.this.runOnUiThread(new Runnable() {
                             public void run() {
-                                // If cache authorized - instead of closing we can take the value from the cache
-                                if (CacheAllowed) {
-                                    setTheCurrentPeriode(false);
-                                } else {
-                                    errorHandler.newException(eTmp);
-                                }
+                                setTheCurrentPeriode(false);
                             }
                         });
                         return;
@@ -271,6 +266,7 @@ public class MainActivity extends Activity implements OnClickListener,
                         conn = (HttpURLConnection) url.openConnection();
                         if (conn.getResponseCode() == 200) {
                             AddInputStreamToCache(getApplicationContext(), conn.getInputStream(), ((Periode) spPeriodes.getSelectedItem()).getImageCode() + "." + extension.png);
+                            Toast.makeText(getApplicationContext(), "Enregistré dans le cache.", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getApplicationContext(), "Erreur réseau et fichier non présent dans le cache.", Toast.LENGTH_LONG).show();
                         }
@@ -289,15 +285,12 @@ public class MainActivity extends Activity implements OnClickListener,
 
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.imageButton1:
+            case R.id.settings:
                 showSettingsDialog();
                 break;
-            /*case R.id.resetCache:
-            //TODO update
-                ResetCache(getApplicationContext());
-                break;*/
             case R.id.refreshButton:
                 loadView(true);
+                Toast.makeText(getApplicationContext(),"Planning rafraîchi.",Toast.LENGTH_LONG).show();
                 break;
             case R.id.exportButton:
                 if(exportCurrentView(getApplicationContext(),((Periode) spPeriodes.getSelectedItem()).getImageCode() + "." + extension.png)==0){

@@ -8,10 +8,15 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Calendar;
 
+//TODO : implement it
 
-public class HttpConnection {
+public abstract class HttpConnection {
     private HttpURLConnection http;
     private boolean error;
+
+    public enum url{
+//TODO
+    }
 
     public boolean isError() {
         return error;
@@ -25,16 +30,15 @@ public class HttpConnection {
         this.error = false;
     }
 
-    public String getContent(String url) {
+    public String getContent(String url1) {
 
         String tmp = "";
         try {
 
-            URL urlPage = new URL(url);
+            URL urlPage = new URL(url1);
 
             HttpURLConnection connection = (HttpURLConnection) urlPage
                     .openConnection();
-
 
             InputStream inputStream = connection.getInputStream();
 
@@ -49,7 +53,6 @@ public class HttpConnection {
 
                 stringBuffer.append(ligne);
 
-                // Android 2.3 et supérieur
                 if (!bufferedReader.ready()) {
                     break;
                 }

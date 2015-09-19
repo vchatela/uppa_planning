@@ -20,13 +20,4 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/textView1" />
-    <CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="Autorisez vous le cache ?" android:id="@+id/checkBox"
-              android:layout_marginTop="50dp"
-              android:checked="true"
-              android:textColor="#ffffffff" android:layout_below="@+id/spinner2"
-              android:layout_centerHorizontal="true"/>
-    <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Reset Cache"
-            android:id="@+id/resetCache"
-            android:layout_below="@+id/checkBox" android:layout_centerHorizontal="true" android:textColor="#ffffffff"/>
 </RelativeLayout>
