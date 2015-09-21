@@ -10,6 +10,7 @@ import java.io.IOException;
  * Created by valentinc on 17/09/2015.
  * Allow functionnalities to export things
  */
+
 public abstract class Export {
 
     public static int exportCurrentView(Context context, String imageName){
