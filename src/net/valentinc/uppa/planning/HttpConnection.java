@@ -9,6 +9,10 @@ import java.net.URL;
 import java.util.Calendar;
 
 //TODO : implement it
+/**
+ * Created by valentinc on 16/09/2015.
+ * Manage httpconnections
+ */
 
 public abstract class HttpConnection {
     private HttpURLConnection http;
@@ -32,7 +36,7 @@ public abstract class HttpConnection {
 
     public String getContent(String url1) {
 
-        String tmp = "";
+        String tmp;
         try {
 
             URL urlPage = new URL(url1);
@@ -81,7 +85,7 @@ public abstract class HttpConnection {
 
     public int getContentLenght(String url) {
 
-        int conLen = 0;
+        int conLen;
         try {
 
             URL urlPage = new URL(url);

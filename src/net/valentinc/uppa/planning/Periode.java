@@ -97,48 +97,8 @@ public class Periode implements Serializable {
 		return code;
 	}
 
-	public String getLabel() {
-		return label;
-	}
-
-	public void setLabel(String label) {
-		this.label = label;
-	}
-
 	public void setImageCode(String imagecode) {
 		this.code = imagecode;
-	}
-
-	public List<String> getLegendes() {
-		return legendes;
-	}
-
-	public void setLegendes(List<String> legendes) {
-		this.legendes = legendes;
-	}
-
-	public Calendar getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(Calendar startDate) {
-		this.startDate = startDate;
-	}
-
-	public Calendar getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(Calendar endDate) {
-		this.endDate = endDate;
-	}
-
-	public int getHttpLength() {
-		return httpLength;
-	}
-
-	public void setHttpLength(int httpLength) {
-		this.httpLength = httpLength;
 	}
 	@Override
 	public String toString() {

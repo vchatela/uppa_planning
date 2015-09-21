@@ -13,10 +13,12 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import android.content.Context;
 import android.util.Log;
+/**
+ * Created by valentinc on 16/09/2015.
+ * XML parser to help request
+ */
 
 public class MyXMLParser {
-
-		static public Context context;
 
 		public static ArrayList<Periode> getPromo(InputStream input) throws SAXException, IOException{
 			// On passe par une classe factory pour obtenir une instance de sax

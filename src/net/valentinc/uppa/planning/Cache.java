@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 /**
  * Created by valentinc on 16/09/2015.
+ * Allow functionnalities to use Cache
  */
 public abstract class Cache {
     // abstract class to be use without instanciation

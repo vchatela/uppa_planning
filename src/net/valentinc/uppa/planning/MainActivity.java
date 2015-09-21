@@ -27,12 +27,15 @@ import java.util.ArrayList;
 
 import static net.valentinc.uppa.planning.Cache.*;
 import static net.valentinc.uppa.planning.Export.exportCurrentView;
+/**
+ * Created by valentinc on 16/09/2015.
+ * MainActivity
+ */
 
 public class MainActivity extends Activity implements OnClickListener,
         OnItemSelectedListener {
 
     public static final String PREFS_NAME = "settings";
-    private final static int CODE_SETTINGS = 1;
     public int progressBarStatus;
 
     public boolean connected = true;
@@ -45,7 +48,6 @@ public class MainActivity extends Activity implements OnClickListener,
     private ArrayList<Promotion> promoList;
     private ProgressDialog progressBar;
     private Handler progressBarHandler = new Handler();
-    private ArrayList<String> files;
     private ArrayList<Periode> periodeList;
 
     private ErrorHandler errorHandler;
@@ -109,104 +111,84 @@ public class MainActivity extends Activity implements OnClickListener,
         progressBarStatus = 0;
 
         Thread t = new Thread(new Runnable() {
-            public void run() {
+public void run(){
+            URL url = null, urlList = null;
+            try {
+                url = new URL("http://www.irokwa.net/uppa/hp/promo-"
+                        + MainActivity.this.thePromo.getCode() + ".xml");
+                //TODO : add string to enum URL + %s
+                urlList = new URL(
+                        "http://www.irokwa.net/uppa/hp/promolist.xml");
 
-                URL url = null, urlList = null;
-                try {
-                    url = new URL("http://www.irokwa.net/uppa/hp/promo-"
-                            + MainActivity.this.thePromo.getCode() + ".xml");
-                    //TODO : add string to enum URL + %s
-                    urlList = new URL(
-                            "http://www.irokwa.net/uppa/hp/promolist.xml");
-                    
 
-                } catch (MalformedURLException e1) {
-                    e1.printStackTrace();
-                }
+            } catch (MalformedURLException e1) {
+                e1.printStackTrace();
+            }
 
-                HttpURLConnection conn = null;
-                HttpURLConnection connList = null;
+            HttpURLConnection conn = null;
+            HttpURLConnection connList = null;
 
-                try {
-                    conn = (HttpURLConnection) url.openConnection();
+            try {
+                conn = (HttpURLConnection) url.openConnection();
 
-                    connList = (HttpURLConnection) urlList.openConnection();
-                    if (conn.getResponseCode() != 200 || connList.getResponseCode() != 200) {
-                        eTmp = new ProxyException();
-                        connected = false;
-                        MainActivity.this.runOnUiThread(new Runnable() {
-                            public void run() {
-                                setTheCurrentPeriode(false);
-                            }
-                        });
-                        return;
-                    } else connected = true;
-                } catch (IOException e1) {
-                    e1.printStackTrace();
+                connList = (HttpURLConnection) urlList.openConnection();
+                if (conn.getResponseCode() != 200 || connList.getResponseCode() != 200) {
+                    eTmp = new ProxyException();
                     connected = false;
+                    MainActivity.this.runOnUiThread(new Runnable() {
+                        public void run() {
+                            setTheCurrentPeriode(false);
+                        }
+                    });
+                    return;
+                } else connected = true;
+            } catch (IOException e1) {
+                e1.printStackTrace();
+                connected = false;
+            }
+            try {
+                if (connected) {
+                    periodeList = MyXMLParser.getPromo(conn.getInputStream());
+                    conn = (HttpURLConnection) url.openConnection();
+                    AddInputStreamToCache(getApplicationContext(), conn.getInputStream(), "promo-" + thePromo.getCode() + ".xml");
+                    promoList = MyXMLParser.getPromos(connList.getInputStream());
+                    connList = (HttpURLConnection) urlList.openConnection();
+                    AddInputStreamToCache(getApplicationContext(), connList.getInputStream(), "promolist.xml");
+                } else {
+                    String PeriodeListName = "promo-" + thePromo.getCode();
+                    String PromoListName = "promolist";
+
+                    if (DoesFileExist(getApplicationContext(), PeriodeListName, extension.xml) && DoesFileExist(getApplicationContext(), PromoListName, extension.xml)) {
+
+                        periodeList = MyXMLParser.getPromo(GetInputStreamFromCache(getApplicationContext(), PeriodeListName, extension.xml));
+                        promoList = MyXMLParser.getPromos(GetInputStreamFromCache(getApplicationContext(), PromoListName, extension.xml));
+                    }
                 }
-                try {
-                    if (connected) {
-                        periodeList = MyXMLParser.getPromo(conn.getInputStream());
-                        conn = (HttpURLConnection) url.openConnection();
-                        AddInputStreamToCache(getApplicationContext(), conn.getInputStream(), "promo-" + thePromo.getCode() + ".xml");
-                        promoList = MyXMLParser.getPromos(connList.getInputStream());
-                        connList = (HttpURLConnection) urlList.openConnection();
-                        AddInputStreamToCache(getApplicationContext(), connList.getInputStream(), "promolist.xml");
-                    } else {
-                        String PeriodeListName = "promo-" + thePromo.getCode();
-                        String PromoListName = "promolist";
+                if (periodeList == null || promoList == null)
+                    throw new ProxyException();
 
-                        files = GetListOfFileInFolder(getCacheDir());
+            } catch (SAXException | ProxyException | IOException e) {
+                eTmp = e;
+                MainActivity.this.runOnUiThread(new Runnable() {
+                    public void run() {
+                        errorHandler.newException(eTmp);
+                    }
+                });
+            }
 
-                        if (DoesFileExist(getApplicationContext(), PeriodeListName, extension.xml) && DoesFileExist(getApplicationContext(), PromoListName, extension.xml)) {
-
-                            periodeList = MyXMLParser.getPromo(GetInputStreamFromCache(getApplicationContext(), PeriodeListName, extension.xml));
-                            promoList = MyXMLParser.getPromos(GetInputStreamFromCache(getApplicationContext(), PromoListName, extension.xml));
+            if (periodeList != null && promoList != null)
+                progressBarHandler.post(new Runnable() {
+                    public void run() {
+                        thePromo.setPeriodes(periodeList);
+                        ReUpdateSpinners();
+                        if (first) {
+                            showSettingsDialog();
+                            first = false;
                         }
                     }
-                    if (periodeList == null || promoList == null)
-                        throw new ProxyException();
-
-                } catch (SAXException e) {
-                    eTmp = e;
-                    MainActivity.this.runOnUiThread(new Runnable() {
-                        public void run() {
-                            errorHandler.newException(eTmp);
-                        }
-                    });
-
-                } catch (IOException e) {
-                    eTmp = e;
-                    MainActivity.this.runOnUiThread(new Runnable() {
-                        public void run() {
-                            errorHandler.newException(eTmp);
-                        }
-                    });
-
-                } catch (ProxyException e) {
-                    eTmp = e;
-                    MainActivity.this.runOnUiThread(new Runnable() {
-                        public void run() {
-                            errorHandler.newException(eTmp);
-                        }
-                    });
-                }
-
-                if (periodeList != null && promoList != null)
-                    progressBarHandler.post(new Runnable() {
-                        public void run() {
-                            thePromo.setPeriodes(periodeList);
-                            ReUpdateSpinners();
-                            if (first) {
-                                showSettingsDialog();
-                                first = false;
-                            }
-                        }
-                    });
-                progressBar.dismiss();
-            }
-        });
+                });
+            progressBar.dismiss();
+        }});
         t.start();
         //Wait end of t
         try {
@@ -218,7 +200,7 @@ public class MainActivity extends Activity implements OnClickListener,
 
     private void ReUpdateSpinners() {
         if (this.thePromo != null) {
-            ArrayAdapter<Periode> spinAdapter = new ArrayAdapter<Periode>(this, android.R.layout.simple_spinner_item, this.thePromo.getPeriodes());
+            ArrayAdapter<Periode> spinAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, this.thePromo.getPeriodes());
             spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             this.spPeriodes.setAdapter(spinAdapter);
             this.spPeriodes.setSelection(spinAdapter.getPosition(this.thePromo.getCurrentPeriode()));
@@ -248,33 +230,31 @@ public class MainActivity extends Activity implements OnClickListener,
                 cacheException.printStackTrace();
                 Toast.makeText(getApplicationContext(),"Impossible de charger le fichier.",Toast.LENGTH_LONG).show();
             }
-            return;
         } else {
             // save the file
             new Thread(new Runnable() {
-                public void run() {
-                    URL url = null;
-                    try {
-                        url = new URL("http://sciences.univ-pau.fr/edt/diplomes/" + ((Periode) spPeriodes.getSelectedItem()).getImageCode() + "." + extension.png);
-                    } catch (MalformedURLException e1) {
-                        e1.printStackTrace();
-                    }
-
-                    HttpURLConnection conn;
-
-                    try {
-                        conn = (HttpURLConnection) url.openConnection();
-                        if (conn.getResponseCode() == 200) {
-                            AddInputStreamToCache(getApplicationContext(), conn.getInputStream(), ((Periode) spPeriodes.getSelectedItem()).getImageCode() + "." + extension.png);
-                            Toast.makeText(getApplicationContext(), "Enregistré dans le cache.", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Erreur réseau et fichier non présent dans le cache.", Toast.LENGTH_LONG).show();
-                        }
-                    } catch (Exception e) {
-                        Log.e("ERROR", e.getMessage());
-                    }
+                public void run(){
+                URL url = null;
+                try {
+                    url = new URL("http://sciences.univ-pau.fr/edt/diplomes/" + ((Periode) spPeriodes.getSelectedItem()).getImageCode() + "." + extension.png);
+                } catch (MalformedURLException e1) {
+                    e1.printStackTrace();
                 }
-            }).start();
+
+                HttpURLConnection conn;
+
+                try {
+                    conn = (HttpURLConnection) url.openConnection();
+                    if (conn.getResponseCode() == 200) {
+                        AddInputStreamToCache(getApplicationContext(), conn.getInputStream(), ((Periode) spPeriodes.getSelectedItem()).getImageCode() + "." + extension.png);
+                        Toast.makeText(getApplicationContext(), "Enregistré dans le cache.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Erreur réseau et fichier non présent dans le cache.", Toast.LENGTH_LONG).show();
+                    }
+                } catch (Exception e) {
+                    Log.e("ERROR", e.getMessage());
+                }
+            }}).start();
         }
     }
 
@@ -331,7 +311,7 @@ public class MainActivity extends Activity implements OnClickListener,
 
         adb.show();
         Spinner sp = (Spinner) alertDialogView.findViewById(R.id.spinner2);
-        ArrayAdapter<Promotion> spinAdapter2 = new ArrayAdapter<Promotion>(
+        ArrayAdapter<Promotion> spinAdapter2 = new ArrayAdapter<>(
                 this, android.R.layout.simple_spinner_item, this.promoList);
         spinAdapter2
                 .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

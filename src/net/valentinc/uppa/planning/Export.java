@@ -8,11 +8,12 @@ import java.io.IOException;
 
 /**
  * Created by valentinc on 17/09/2015.
+ * Allow functionnalities to export things
  */
 public abstract class Export {
 
     public static int exportCurrentView(Context context, String imageName){
-        //copy file from cache to ... For the moment only Documents Folder
+        /* copy file from cache to ... For the moment only Documents Folder */
         File file = new File(context.getCacheDir().getAbsolutePath() + File.separator + imageName);
         if(!file.exists()){
             return -1;

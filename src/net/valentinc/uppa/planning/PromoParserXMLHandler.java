@@ -7,17 +7,15 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+/**
+ * Created by valentinc on 16/09/2015.
+ * Allow functionnalities to PromoParser to parse promo files
+ */
+
 public class PromoParserXMLHandler extends DefaultHandler {
 
 	// nom des tags XML
 	private final String PERIODE = "periode";
-	private final String CODE = "code";
-	private final String DATE = "date";
-	private final String LEGENDE = "legende";
-	private final String LEGENDES = "legendes";
-	private final String CREATOR = "creator";
-	private final String DESCRIPTION = "description";
-	private final String LAST = "lastupdate";
 
 	// Array list de feeds
 	private ArrayList entries;
@@ -28,7 +26,7 @@ public class PromoParserXMLHandler extends DefaultHandler {
 	// Feed courant
 	private Periode currentFeed;
 
-	// Buffer permettant de contenir les donn�es d'un tag XML
+	// Buffer permettant de contenir les données d'un tag XML
 	private StringBuffer buffer;
 
 	@Override
@@ -71,17 +69,6 @@ public class PromoParserXMLHandler extends DefaultHandler {
 			inItem = true;
 		}
 
-		// Vous pouvez définir des actions à effectuer pour chaque item rencontré
-		if (localName.equalsIgnoreCase(CODE)){
-			// Nothing to do
-		}
-		if (localName.equalsIgnoreCase(DATE)){
-			// Nothing to do
-		}
-		if (localName.equalsIgnoreCase(LEGENDE)){
-			// Nothing to do
-		}
-
 	}
 
 	// * Fonction étant déclenchée lorsque le parser a parsé
@@ -92,21 +79,24 @@ public class PromoParserXMLHandler extends DefaultHandler {
 	// * notre objet currentFeed
 
 	@Override
-	public void endElement(String uri, String localName, String name) throws SAXException {		
+	public void endElement(String uri, String localName, String name) throws SAXException {
 
+		String CODE = "code";
 		if (localName.equalsIgnoreCase(CODE)){
 			if(inItem){
-				// Les caract�res sont dans l'objet buffer
+				// Les caractères sont dans l'objet buffer
 				this.currentFeed.setImageCode(buffer.toString());
 				buffer = null;
 			}
 		}
+		String DATE = "date";
 		if (localName.equalsIgnoreCase(DATE)){
 			if(inItem){
 				this.currentFeed.setStrDate(buffer.toString());
 				buffer = null;
 			}
 		}
+		String LEGENDE = "legende";
 		if (localName.equalsIgnoreCase(LEGENDE)){
 			if(inItem){
 				this.currentFeed.addLegende(buffer.toString());
@@ -118,9 +108,9 @@ public class PromoParserXMLHandler extends DefaultHandler {
 			entries.add(currentFeed);
 			inItem = false;
 		}
+		String LAST = "lastupdate";
 		if (localName.equalsIgnoreCase(LAST)){
 			shouldOk = true;
-			
 		}
 	}
 	public boolean shouldBeOk() {

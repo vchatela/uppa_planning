@@ -3,6 +3,10 @@ package net.valentinc.uppa.planning;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+/**
+ * Created by valentinc on 16/09/2015.
+ * Manage Promotion instance
+ */
 
 public class Promotion implements Serializable{
 	private List<Periode> periodes;
