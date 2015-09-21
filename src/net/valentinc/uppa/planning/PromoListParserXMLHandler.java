@@ -1,11 +1,15 @@
 package net.valentinc.uppa.planning;
 
-
 import java.util.ArrayList;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+
+/**
+ * Created by valentinc on 16/09/2015.
+ * Allow functionnalities to PromoListParser to parse promolist file
+ */
 
 public class PromoListParserXMLHandler extends DefaultHandler {
 

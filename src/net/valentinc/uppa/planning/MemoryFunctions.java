@@ -4,7 +4,9 @@ import java.io.*;
 
 /**
  * Created by valentinc on 17/09/2015.
+ * Allow functionnalities to use memory functions
  */
+
 public abstract class MemoryFunctions {
 
     public static void copy(File src, File dst) throws IOException {
