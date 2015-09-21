@@ -8,7 +8,8 @@
     <string name="title_reglages">Réglages</string>
     <string name="title_welcome">Welcome!</string>
     <string name="txt_welcome">Vous lancez Plannig UPPA pour la première fois. Cette application permet de visualiser votre planning directement depuis votre mobile. Cliquez continuer pour configurer l\'application.</string>
-    
+    <string name="title_start_activity">StartUp</string>
+
     <string name="choose">Choisissez votre promotion:</string>
     <string name="btn_ok">OK</string>
     <string name="btn_continue">Continuer</string>
@@ -16,5 +17,7 @@
     <string name="Refresh">Refresh</string>
     <string name="Export">Export</string>
     <string name="resetCache">Reset Cache</string>
+    <string name="LogoStartUp">LogoUPPA</string>
+    <string name="Version">Version 2.0</string>
 
 </resources>

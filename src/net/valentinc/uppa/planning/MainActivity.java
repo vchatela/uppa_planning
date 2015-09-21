@@ -27,6 +27,7 @@ import java.util.ArrayList;
 
 import static net.valentinc.uppa.planning.Cache.*;
 import static net.valentinc.uppa.planning.Export.exportCurrentView;
+
 /**
  * Created by valentinc on 16/09/2015.
  * MainActivity
@@ -228,7 +229,7 @@ public void run(){
                 updateWebView(getApplicationContext(), webView, ((Periode) spPeriodes.getSelectedItem()).getImageCode(), extension.png);
             } catch (CacheException cacheException) {
                 cacheException.printStackTrace();
-                Toast.makeText(getApplicationContext(),"Impossible de charger le fichier.",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Impossible de charger le fichier",Toast.LENGTH_LONG).show();
             }
         } else {
             // save the file
@@ -247,9 +248,9 @@ public void run(){
                     conn = (HttpURLConnection) url.openConnection();
                     if (conn.getResponseCode() == 200) {
                         AddInputStreamToCache(getApplicationContext(), conn.getInputStream(), ((Periode) spPeriodes.getSelectedItem()).getImageCode() + "." + extension.png);
-                        Toast.makeText(getApplicationContext(), "Enregistré dans le cache.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Enregistré dans le cache", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Erreur réseau et fichier non présent dans le cache.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Erreur réseau et fichier non présent dans le cache", Toast.LENGTH_LONG).show();
                     }
                 } catch (Exception e) {
                     Log.e("ERROR", e.getMessage());
@@ -270,14 +271,14 @@ public void run(){
                 break;
             case R.id.refreshButton:
                 loadView(true);
-                Toast.makeText(getApplicationContext(),"Planning rafraîchi.",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Planning mis à jour",Toast.LENGTH_LONG).show();
                 break;
             case R.id.exportButton:
                 if(exportCurrentView(getApplicationContext(),((Periode) spPeriodes.getSelectedItem()).getImageCode() + "." + extension.png)==0){
-                    Toast.makeText(getApplicationContext(),"Sauvegardé dans \"Documents\".",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"Sauvegardé dans \"Documents\"",Toast.LENGTH_LONG).show();
                 }
                 else{
-                    Toast.makeText(getApplicationContext(),"Erreur durant la sauvegarde.",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"Erreur durant la sauvegarde",Toast.LENGTH_LONG).show();
                 }
                 break;
         }
