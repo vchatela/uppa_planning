@@ -1,8 +1,11 @@
-# uppa_planning [![Build Status](https://travis-ci.org/vchatela/uppa_planning.svg?branch=master)](https://travis-ci.org/vchatela/uppa_planning)
+# Planning UPPA [![Build Status](https://travis-ci.org/vchatela/uppa_planning.svg?branch=master)](https://travis-ci.org/vchatela/uppa_planning)
 Planning for Université de Pau et des Pays de l'Adour
 
-## License 
-cf LICENSE document
+# New features / Release
+
+https://github.com/vchatela/uppa_planning/releases
+
+## License
 
 Copyright 2015
 
