@@ -13,5 +13,5 @@ android:
     - android-21
 
 install: gradle clean build --info
-script: gradle check jacocoTestReport --stacktrace --info --continue
-after_success: gradle coveralls --info
+#script: gradle check jacocoTestReport --stacktrace --info --continue
+#after_success: gradle coveralls --info
