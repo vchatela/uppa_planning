@@ -26,17 +26,8 @@ android {
             manifest.srcFile 'AndroidManifest.xml'
             res.srcDir file('res/')
         }
-        unitTest {
-            java.srcDir file('test')
-            resources.srcDir file('test/resources')
-        }
-
     }
     lintOptions {
         abortOnError false
     }
-}
-dependencies {
-    testCompile 'junit:junit:4.+'
-    testCompile "org.mockito:mockito-core:1.9.5"
 }
