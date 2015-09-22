@@ -1,6 +1,7 @@
 package net.valentinc.uppa.planning.test;
 
 import junit.framework.TestCase;
+import org.junit.Test;
 
 /**
  * Created by valentinc on 22/09/2015.
@@ -15,4 +16,12 @@ public class unitTest extends TestCase {
     - copy works
 
      */
+    @Test
+    public final void testCacheFile() {
+
+    }
+    @Test
+    public final void testCopy() {
+
+    }
 }

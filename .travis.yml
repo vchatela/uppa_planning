@@ -12,5 +12,6 @@ android:
     # The SDK version used to compile your project
     - android-21
 
-script: gradle clean build --info
+install: gradle clean build --info
+script: gradle check jacocoTestReport --stacktrace --info --continue
 after_success: gradle coveralls --info
