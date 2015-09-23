@@ -16,4 +16,4 @@ https://github.com/vchatela/uppa_planning/releases
 
 Copyright 2015 ValentinC
 
-![Creative Common BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode)
+[Creative Common BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode)
