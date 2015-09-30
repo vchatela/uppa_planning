@@ -1,7 +1,7 @@
-package net.valentinc.uppa.planning.test;
+package net.irokwa.uppa.planning.test;
 
 import android.test.ActivityInstrumentationTestCase2;
-import net.valentinc.uppa.hyperplanning.MainActivity;
+import net.irokwa.uppa.planning.MainActivity;
 
 /**
  * Created by valentinc on 22/09/2015.

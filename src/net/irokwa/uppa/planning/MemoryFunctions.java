@@ -1,4 +1,4 @@
-package net.valentinc.uppa.hyperplanning;
+package net.irokwa.uppa.planning;
 
 import java.io.*;
 
