@@ -1,8 +1,9 @@
-package net.valentinc.uppa.planning;
+package net.valentinc.uppa.hyperplanning;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+
 
 /**
  * Created by valentinc on 21/09/2015.

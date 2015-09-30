@@ -1,4 +1,4 @@
-package net.valentinc.uppa.planning;
+package net.valentinc.uppa.hyperplanning;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,7 +11,6 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import android.content.Context;
 import android.util.Log;
 /**
  * Created by valentinc on 16/09/2015.

@@ -1,4 +1,4 @@
-package net.valentinc.uppa.planning;
+package net.valentinc.uppa.hyperplanning;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -24,9 +24,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-
-import static net.valentinc.uppa.planning.Cache.*;
-import static net.valentinc.uppa.planning.Export.exportCurrentView;
 
 /**
  * Created by valentinc on 16/09/2015.
@@ -151,18 +148,18 @@ public void run(){
                 if (connected) {
                     periodeList = MyXMLParser.getPromo(conn.getInputStream());
                     conn = (HttpURLConnection) url.openConnection();
-                    AddInputStreamToCache(getApplicationContext(), conn.getInputStream(), "promo-" + thePromo.getCode() + ".xml");
+                    Cache.AddInputStreamToCache(getApplicationContext(), conn.getInputStream(), "promo-" + thePromo.getCode() + ".xml");
                     promoList = MyXMLParser.getPromos(connList.getInputStream());
                     connList = (HttpURLConnection) urlList.openConnection();
-                    AddInputStreamToCache(getApplicationContext(), connList.getInputStream(), "promolist.xml");
+                    Cache.AddInputStreamToCache(getApplicationContext(), connList.getInputStream(), "promolist.xml");
                 } else {
                     String PeriodeListName = "promo-" + thePromo.getCode();
                     String PromoListName = "promolist";
 
-                    if (DoesFileExist(getApplicationContext(), PeriodeListName, extension.xml) && DoesFileExist(getApplicationContext(), PromoListName, extension.xml)) {
+                    if (Cache.DoesFileExist(getApplicationContext(), PeriodeListName, Cache.extension.xml) && Cache.DoesFileExist(getApplicationContext(), PromoListName, Cache.extension.xml)) {
 
-                        periodeList = MyXMLParser.getPromo(GetInputStreamFromCache(getApplicationContext(), PeriodeListName, extension.xml));
-                        promoList = MyXMLParser.getPromos(GetInputStreamFromCache(getApplicationContext(), PromoListName, extension.xml));
+                        periodeList = MyXMLParser.getPromo(Cache.GetInputStreamFromCache(getApplicationContext(), PeriodeListName, Cache.extension.xml));
+                        promoList = MyXMLParser.getPromos(Cache.GetInputStreamFromCache(getApplicationContext(), PromoListName, Cache.extension.xml));
                     }
                 }
                 if (periodeList == null || promoList == null)
@@ -224,9 +221,9 @@ public void run(){
                 ((Periode) spPeriodes.getSelectedItem()).toHtml(), "text/html",
                 "UTF-8", null);
         //store picture from here   http://sciences.univ-pau.fr/edt/diplomes/D0005395052S0000000000004.png
-        if (DoesFileExist(getApplicationContext(), ((Periode) spPeriodes.getSelectedItem()).getImageCode(), extension.png) && !refresh) {
+        if (Cache.DoesFileExist(getApplicationContext(), ((Periode) spPeriodes.getSelectedItem()).getImageCode(), Cache.extension.png) && !refresh) {
             try {
-                updateWebView(getApplicationContext(), webView, ((Periode) spPeriodes.getSelectedItem()).getImageCode(), extension.png);
+                Cache.updateWebView(getApplicationContext(), webView, ((Periode) spPeriodes.getSelectedItem()).getImageCode(), Cache.extension.png);
             } catch (CacheException cacheException) {
                 cacheException.printStackTrace();
                 Toast.makeText(getApplicationContext(),"Impossible de charger le fichier",Toast.LENGTH_LONG).show();
@@ -237,7 +234,7 @@ public void run(){
                 public void run(){
                 URL url = null;
                 try {
-                    url = new URL("http://sciences.univ-pau.fr/edt/diplomes/" + ((Periode) spPeriodes.getSelectedItem()).getImageCode() + "." + extension.png);
+                    url = new URL("http://sciences.univ-pau.fr/edt/diplomes/" + ((Periode) spPeriodes.getSelectedItem()).getImageCode() + "." + Cache.extension.png);
                 } catch (MalformedURLException e1) {
                     e1.printStackTrace();
                 }
@@ -247,7 +244,7 @@ public void run(){
                 try {
                     conn = (HttpURLConnection) url.openConnection();
                     if (conn.getResponseCode() == 200) {
-                        AddInputStreamToCache(getApplicationContext(), conn.getInputStream(), ((Periode) spPeriodes.getSelectedItem()).getImageCode() + "." + extension.png);
+                        Cache.AddInputStreamToCache(getApplicationContext(), conn.getInputStream(), ((Periode) spPeriodes.getSelectedItem()).getImageCode() + "." + Cache.extension.png);
                         Toast.makeText(getApplicationContext(), "Enregistré dans le cache", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getApplicationContext(), "Erreur réseau et fichier non présent dans le cache", Toast.LENGTH_LONG).show();
@@ -274,7 +271,7 @@ public void run(){
                 Toast.makeText(getApplicationContext(),"Planning mis à jour",Toast.LENGTH_LONG).show();
                 break;
             case R.id.exportButton:
-                if(exportCurrentView(getApplicationContext(),((Periode) spPeriodes.getSelectedItem()).getImageCode() + "." + extension.png)==0){
+                if(Export.exportCurrentView(getApplicationContext(), ((Periode) spPeriodes.getSelectedItem()).getImageCode() + "." + Cache.extension.png)==0){
                     Toast.makeText(getApplicationContext(),"Sauvegardé dans \"Documents\"",Toast.LENGTH_LONG).show();
                 }
                 else{

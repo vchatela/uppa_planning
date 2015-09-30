@@ -1,4 +1,4 @@
-package net.valentinc.uppa.planning;
+package net.valentinc.uppa.hyperplanning;
 
 import android.content.Context;
 import android.os.Environment;
