@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="B:\Dropbox\Git\uppa_planning\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\libs\internal_impl-22.2.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
+        <dex dex="B:\Dropbox\Git\uppa_planning\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.0-74f31f6e31aa01bbfa23bf3bda59310bba38c2d2.jar" />
+    </item>
+    <item
+        jar="B:\Dropbox\Git\uppa_planning\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
+        <dex dex="B:\Dropbox\Git\uppa_planning\app\build\intermediates\pre-dexed\debug\classes-1e50689d3010ac136810947bb5ae5966520c9e55.jar" />
+    </item>
+    <item
+        jar="C:\Users\ValentinC\AppData\Local\Android\android-sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.0\support-annotations-22.2.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
+        <dex dex="B:\Dropbox\Git\uppa_planning\app\build\intermediates\pre-dexed\debug\support-annotations-22.2.0-d9fd45e9885b7f413bafe0ca0adb7ef08f53c408.jar" />
+    </item>
+    <item
+        jar="B:\Dropbox\Git\uppa_planning\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="997773777cf3904c11d6764fe3b7668538220e49">
+        <dex dex="B:\Dropbox\Git\uppa_planning\app\build\intermediates\pre-dexed\debug\classes-e87ca5292837842bb47537f7540e3fd2e6b0a659.jar" />
+    </item>
+    <item
+        jar="B:\Dropbox\Git\uppa_planning\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="4477ea44f5ec5ad064022a22691732d7638ff197">
+        <dex dex="B:\Dropbox\Git\uppa_planning\app\build\intermediates\pre-dexed\debug\classes-7c7cadda9d3849ecd73984a69fe8878f108fbf90.jar" />
+    </item>
+    <item
+        jar="B:\Dropbox\Git\uppa_planning\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="d0dda274b703dd9c5bb056867649d22b4171ae7d">
+        <dex dex="B:\Dropbox\Git\uppa_planning\app\build\intermediates\pre-dexed\debug\classes-58b3da928595767e500aad99a3b73f0940c9aa84.jar" />
+    </item>
+
+</items>

@@ -9,14 +9,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
+import android.view.*;
 import android.view.View.OnClickListener;
 import android.webkit.WebView;
 import android.widget.*;
 import android.widget.AdapterView.OnItemSelectedListener;
+import com.google.android.gms.ads.InterstitialAd;
 import org.xml.sax.SAXException;
 
 import java.io.IOException;
@@ -24,6 +22,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 
 /**
  * Created by valentinc on 16/09/2015.
@@ -35,6 +37,9 @@ public class MainActivity extends Activity implements OnClickListener,
 
     public static final String PREFS_NAME = "settings";
     public int progressBarStatus;
+
+    private AdView adView;
+    private InterstitialAd mInterstitialAd;
 
     public boolean connected = true;
     public Exception eTmp;
@@ -56,9 +61,18 @@ public class MainActivity extends Activity implements OnClickListener,
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_main);
 
         errorHandler = new ErrorHandler(this);
+
+        //Load AdMob
+        adView = (AdView)this.findViewById(R.id.adView);
+        //AdRequest adRequest = new AdRequest.Builder().build();
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
 
         // Initialisation des elements UI
         this.tvPromo = (TextView) findViewById(R.id.tv_promo);
@@ -81,6 +95,30 @@ public class MainActivity extends Activity implements OnClickListener,
         this.restorePromotion();
         this.ReUpdateSpinners();
         Log.i("INFO", "End Of Creation");
+    }
+
+    @Override
+    public void onPause() {
+        if (adView != null) {
+            adView.pause();
+        }
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (adView != null) {
+            adView.resume();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        if (adView != null) {
+            adView.destroy();
+        }
+        super.onDestroy();
     }
 
     private void setTheCurrentPeriode(boolean refresh) {
