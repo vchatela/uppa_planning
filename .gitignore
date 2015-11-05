@@ -5,3 +5,4 @@ app/build/*
 app/gradle/*
 app/.idea/*
 build/*
+local.properties
