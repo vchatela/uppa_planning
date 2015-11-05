@@ -17,6 +17,7 @@ android:
     - extra-google-m2repository
     - extra-android-m2repository
     - addon-google_apis-google-19
+
+before_install:
+ - chmod +x gradlew
 install: gradle clean build --info
-#script: gradle check jacocoTestReport --stacktrace --info --continue
-#after_success: gradle coveralls --info
