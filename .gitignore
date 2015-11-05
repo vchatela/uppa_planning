@@ -2,3 +2,6 @@ out\*
 .idea/*
 .gradle/*
 app/build/*
+app/gradle/*
+app/.idea/*
+build/*
