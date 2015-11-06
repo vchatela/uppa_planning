@@ -1,4 +1,6 @@
-# Planning UPPA [![Build Status](https://travis-ci.org/vchatela/uppa_planning.svg?branch=IroKwa)](https://travis-ci.org/vchatela/uppa_planning)
+# Planning UPPA 
+Master Release [![Build Status](https://travis-ci.org/vchatela/uppa_planning.svg?branch=master)](https://travis-ci.org/vchatela/uppa_planning)  -  Irokwa Branch [![Build Status](https://travis-ci.org/vchatela/uppa_planning.svg?branch=IroKwa)](https://travis-ci.org/vchatela/uppa_planning)
+
 Planning for Université de Pau et des Pays de l'Adour
 
 ## New features / Release
