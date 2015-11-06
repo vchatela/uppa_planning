@@ -1,0 +1,25 @@
+<resources>
+
+    <string name="app_name">Planning UPPA</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="banner_ad_unit_id">ca-app-pub-6079441999818020/8557100397</string>
+    <integer name="google_play_services_version">8115000</integer>
+    <string name="menu_settings">Réglages</string>
+    <string name="menu_exit">Quiter</string>
+    <string name="title_activity_main">Planning UPPA</string>
+    <string name="title_reglages">Réglages</string>
+    <string name="title_welcome">Welcome!</string>
+    <string name="txt_welcome">Vous lancez Plannig UPPA pour la première fois. Cette application permet de visualiser votre planning directement depuis votre mobile. Cliquez continuer pour configurer l\'application.</string>
+    <string name="title_start_activity">StartUp</string>
+
+    <string name="choose">Choisissez votre promotion:</string>
+    <string name="btn_ok">OK</string>
+    <string name="btn_continue">Continuer</string>
+    <string name="promo"> Aucune promo selectionné. Menu > Réglages</string>
+    <string name="Refresh">Refresh</string>
+    <string name="Export">Export</string>
+    <string name="resetCache">Reset Cache</string>
+    <string name="LogoStartUp">LogoUPPA</string>
+    <string name="Version">Version 2.0</string>
+
+</resources>
