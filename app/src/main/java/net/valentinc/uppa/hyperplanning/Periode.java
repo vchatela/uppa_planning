@@ -13,32 +13,19 @@ public class Periode implements Serializable {
 	private List<String> legendes;
 	private Calendar startDate;
 	private Calendar endDate;
-	private int httpLength;
 	private final static String baseUrl = "http://sciences.univ-pau.fr/edt/diplomes/";
 
-	public Periode(String label, String code) {
-		this.code = code;
-		this.label = label;
-		this.legendes = new ArrayList<String>();
-		this.startDate = Calendar.getInstance();
-		this.endDate = Calendar.getInstance();
-		this.httpLength = 0;
-		
-		this.computeDates();
-	}
 	public Periode() {
 		this.code = "";
 		this.label = "";
-		this.legendes = new ArrayList<String>();
+		this.legendes = new ArrayList<>();
 		this.startDate = Calendar.getInstance();
 		this.endDate = Calendar.getInstance();
-		this.httpLength = 0;
 
 	}
 	public boolean isCurrentPeriode() {
 		Calendar rightNow = Calendar.getInstance();
-		if(this.endDate.after(rightNow)) return true;
-		return false;
+		return this.endDate.after(rightNow);
 	}
 
 	public  void addLegende(String legende) {
@@ -49,7 +36,7 @@ public class Periode implements Serializable {
 		this.computeDates();
 	}
 	private void computeDates() {
-		ArrayList<String> months = new ArrayList<String>();
+		ArrayList<String> months = new ArrayList<>();
 		months.add("janvier");
 		months.add("février");
 		months.add("mars");
@@ -63,7 +50,7 @@ public class Periode implements Serializable {
 		months.add("novembre");
 		months.add("décembre");
 
-		LinkedList<String> liste = new LinkedList<String>();
+		LinkedList<String> liste = new LinkedList<>();
 		StringTokenizer st = new StringTokenizer(this.label, " ");
 		while (st.hasMoreTokens()) {
 			liste.add(st.nextToken());

@@ -55,7 +55,7 @@ public class PromoListParserXMLHandler extends DefaultHandler {
 	@Override
 	public void startDocument() throws SAXException {
 		super.startDocument();
-		entries = new ArrayList<Promotion>();
+		entries = new ArrayList<>();
 
 	}
 
@@ -77,9 +77,9 @@ public class PromoListParserXMLHandler extends DefaultHandler {
 		}
 
 		// Vous pouvez définir des actions à effectuer pour chaque item rencontré
-		if (localName.equalsIgnoreCase(CODE)){
+		/*if (localName.equalsIgnoreCase(CODE)){
 			// Nothing to do
-		}
+		}*/
 	}
 
 	// * Fonction étant déclenchée lorsque le parseràparsé

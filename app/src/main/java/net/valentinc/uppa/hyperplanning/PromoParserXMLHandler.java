@@ -16,6 +16,10 @@ public class PromoParserXMLHandler extends DefaultHandler {
 
 	// nom des tags XML
 	private final String PERIODE = "periode";
+	private final String CODE = "code";
+	private final String DATE = "date";
+	private final String LEGENDE = "legende";
+	private final String LAST = "lastupdate";
 
 	// Array list de feeds
 	private ArrayList entries;
@@ -48,7 +52,7 @@ public class PromoParserXMLHandler extends DefaultHandler {
 	@Override
 	public void startDocument() throws SAXException {
 		super.startDocument();
-		entries = new ArrayList<Periode>();
+		entries = new ArrayList<>();
 
 	}
 
@@ -81,7 +85,6 @@ public class PromoParserXMLHandler extends DefaultHandler {
 	@Override
 	public void endElement(String uri, String localName, String name) throws SAXException {
 
-		String CODE = "code";
 		if (localName.equalsIgnoreCase(CODE)){
 			if(inItem){
 				// Les caractères sont dans l'objet buffer
@@ -89,14 +92,12 @@ public class PromoParserXMLHandler extends DefaultHandler {
 				buffer = null;
 			}
 		}
-		String DATE = "date";
 		if (localName.equalsIgnoreCase(DATE)){
 			if(inItem){
 				this.currentFeed.setStrDate(buffer.toString());
 				buffer = null;
 			}
 		}
-		String LEGENDE = "legende";
 		if (localName.equalsIgnoreCase(LEGENDE)){
 			if(inItem){
 				this.currentFeed.addLegende(buffer.toString());
@@ -108,7 +109,7 @@ public class PromoParserXMLHandler extends DefaultHandler {
 			entries.add(currentFeed);
 			inItem = false;
 		}
-		String LAST = "lastupdate";
+
 		if (localName.equalsIgnoreCase(LAST)){
 			shouldOk = true;
 		}

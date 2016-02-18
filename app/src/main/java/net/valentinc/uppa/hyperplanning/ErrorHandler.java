@@ -10,7 +10,6 @@ import android.content.DialogInterface;
 
 public class ErrorHandler {
 	private final static String NET = "Connectivité réseau - Pensez a autoriser le cache.";
-	private final static String PARSE = "Données reçues corrompues.";
 	private final static String PROXY = "Impossible de récupérer le planning. Si vous étes sur un hot-spot Wifi, vérifiez que vous êtes bien identifié.";
 
 	private Activity context;

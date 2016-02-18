@@ -19,17 +19,15 @@ import android.util.Log;
 
 public class MyXMLParser {
 
-		public static ArrayList<Periode> getPromo(InputStream input) throws SAXException, IOException{
+		public static ArrayList getPromo(InputStream input) throws SAXException, IOException{
 			// On passe par une classe factory pour obtenir une instance de sax
 			SAXParserFactory fabrique = SAXParserFactory.newInstance();
 			SAXParser parseur = null;
-			ArrayList<Periode> entries = null;
+			ArrayList entries = null;
 			try {
 				// On "fabrique" une instance de SAXParser
 				parseur = fabrique.newSAXParser();
-			} catch (ParserConfigurationException e) {
-				e.printStackTrace();
-			} catch (SAXException e) {
+			} catch (ParserConfigurationException | SAXException e) {
 				e.printStackTrace();
 			}
 			
@@ -38,22 +36,16 @@ public class MyXMLParser {
 			 * des opérations de parsing. On vera cette classe en détails ci aprés.
 			*/
 			DefaultHandler handler = new PromoParserXMLHandler();
-			try {
-				// On parse le fichier XML
-				if(input==null)
-					Log.e("ERROR","Parsing inputStream null");
-				else{
-					parseur.parse(input, handler);
-					// On récupére directement la liste des feeds
-					entries = ((PromoParserXMLHandler) handler).getData();
-					if (!((PromoParserXMLHandler)handler).shouldBeOk() )
-						entries = null;
-				}
-			} catch (SAXException e) {
-				throw e;
-			} catch (IOException e) {
-				throw e;
-			}
+			if(input==null)
+                Log.e("ERROR","Parsing inputStream null");
+            else{
+                assert parseur != null;
+                parseur.parse(input, handler);
+                // On récupére directement la liste des feeds
+                entries = ((PromoParserXMLHandler) handler).getData();
+                if (!((PromoParserXMLHandler)handler).shouldBeOk() )
+                    entries = null;
+            }
 			return entries;
 		}
 
@@ -65,9 +57,7 @@ public class MyXMLParser {
 			try {
 				// On "fabrique" une instance de SAXParser
 				parseur = fabrique.newSAXParser();
-			} catch (ParserConfigurationException e) {
-				e.printStackTrace();
-			} catch (SAXException e) {
+			} catch (ParserConfigurationException | SAXException e) {
 				e.printStackTrace();
 			}
 
@@ -76,23 +66,16 @@ public class MyXMLParser {
 			 * des opérations de parsing. On vera cette classe en détails ci aprés.
 			*/
 			DefaultHandler handler = new PromoListParserXMLHandler();
-			try {
-				// On parse le fichier XML
-				
-				if(input==null)
-					Log.e("erreur android","null");
-				else{
-					parseur.parse(input, handler);
-					// On récupère directement la liste des feeds
-					entries = ((PromoListParserXMLHandler) handler).getData();
-					if (!((PromoListParserXMLHandler)handler).shouldBeOk() )
-						entries = null;
-				}
-			} catch (SAXException e) {
-				throw e;
-			} catch (IOException e) {
-				throw e;
-			}
+			if(input==null)
+                Log.e("erreur android","null");
+            else{
+                assert parseur != null;
+                parseur.parse(input, handler);
+                // On récupère directement la liste des feeds
+                entries = ((PromoListParserXMLHandler) handler).getData();
+                if (!((PromoListParserXMLHandler)handler).shouldBeOk() )
+                    entries = null;
+            }
 			return entries;
 		}
 

@@ -39,7 +39,6 @@ public class MainActivity extends Activity implements OnClickListener,
     public int progressBarStatus;
 
     private AdView adView;
-    private InterstitialAd mInterstitialAd;
 
     public boolean connected = true;
     public Exception eTmp;
@@ -70,7 +69,6 @@ public class MainActivity extends Activity implements OnClickListener,
 
         //Load AdMob
         adView = (AdView)this.findViewById(R.id.adView);
-        //AdRequest adRequest = new AdRequest.Builder().build();
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
 
@@ -152,7 +150,6 @@ public void run(){
             try {
                 url = new URL("http://www.irokwa.net/uppa/hp/promo-"
                         + MainActivity.this.thePromo.getCode() + ".xml");
-                //TODO : add string to enum URL + %s
                 urlList = new URL(
                         "http://www.irokwa.net/uppa/hp/promolist.xml");
 

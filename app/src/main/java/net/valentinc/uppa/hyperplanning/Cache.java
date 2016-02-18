@@ -5,7 +5,6 @@ import android.util.Log;
 import android.webkit.WebView;
 
 import java.io.*;
-import java.util.ArrayList;
 
 /**
  * Created by valentinc on 16/09/2015.
@@ -24,7 +23,7 @@ public abstract class Cache {
         FileOutputStream output = new FileOutputStream(path);
         int bufferSize = 1024;
         byte[] buffer = new byte[bufferSize];
-        int len = 0;
+        int len;
         while ((len = input.read(buffer)) != -1) {
             output.write(buffer, 0, len);
         }
@@ -46,34 +45,6 @@ public abstract class Cache {
         }
     }
 
-    public static ArrayList<String> GetListOfFileInFolder(File folder){
-        if(!folder.exists())
-            return new ArrayList<>();
-        else{
-            File[] listFile = folder.listFiles();
-            int nbrElem = listFile.length;
-            ArrayList<String> list = new ArrayList<>();
-            for(int i = 0; i < nbrElem;i++){
-                list.add(listFile[i].getName());
-            }
-            return list;
-        }
-    }
-
-    public static File TakeElementFromCache(Context context, String nameOfFile,extension e) throws CacheException {
-        Log.i("INFO","TakeElementFromCache " + nameOfFile+'.'+e);
-        String path = context.getFilesDir().getAbsolutePath() + File.separator;
-        String CurrentPath = path+nameOfFile+'.'+e;
-        File file = new File(CurrentPath);
-
-        if (file.exists()) {
-            Log.i("INFO","File taken from cache :" + file.getName());
-            return file;
-        } else {
-            throw new CacheException("File does not exist");
-        }
-    }
-
     public static void updateWebView(Context context, WebView web, String nameOfFile,extension e) throws CacheException {
         Log.i("INFO", "Update webview with " + nameOfFile+'.'+e);
         String path = context.getCacheDir().getAbsolutePath()+File.separator+nameOfFile+'.'+e;
@@ -88,20 +59,5 @@ public abstract class Cache {
         File file = new File(CurrentPath);
         Log.i("INFO", "File exists : " + file.exists());
         return file.exists();
-    }
-    public static void ResetCache(Context context){
-        Log.i("INFO", "Start Reset Cache ");
-        Log.i("INFO", "Number of file " + context.getApplicationContext().getCacheDir().listFiles().length);
-        for(File file : context.getApplicationContext().getCacheDir().listFiles()){
-            Log.i("INFO", "Will delete : " + file.getName());
-            try{
-                file.delete();
-            }catch (Exception e){
-                Log.e("Error","Error during deletion");
-            }
-
-            Log.i("INFO", "File deleted :" + file.getName());
-        }
-        Log.i("INFO", "End Reset Cache ");
     }
 }

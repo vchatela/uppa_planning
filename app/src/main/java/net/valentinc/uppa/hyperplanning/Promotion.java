@@ -12,14 +12,13 @@ public class Promotion implements Serializable{
 	private List<Periode> periodes;
 	private String name;
 	private String code;
-	private Periode currentPeriode;
 
 	public Promotion() {
-		this.periodes = new ArrayList<Periode>();
+		this.periodes = new ArrayList<>();
 	}
 
 	public Promotion(String name, String code) {
-		this.periodes = new ArrayList<Periode>();
+		this.periodes = new ArrayList<>();
 		this.name = name;
 		this.code = code;
 	}
@@ -60,10 +59,6 @@ public class Promotion implements Serializable{
 			return null;
 	}
 
-	public void setCurrentPeriode(Periode currentPeriode) {
-		this.currentPeriode = currentPeriode;
-	}
-
 	@Override
 	public String toString() {
 		
@@ -72,9 +67,7 @@ public class Promotion implements Serializable{
 	@Override
 	public boolean equals(Object o) {
 		if( o instanceof Promotion){
-			if (((Promotion)o).getCode().equalsIgnoreCase(this.code))
-					return true;
-			else return false;
+			return ((Promotion) o).getCode().equalsIgnoreCase(this.code);
 		}
 		return super.equals(o);
 	}
