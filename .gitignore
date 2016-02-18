@@ -1,8 +1,8 @@
-out\*
-.idea/*
-.gradle/*
-app/build/*
-app/gradle/*
-app/.idea/*
-build/*
-local.properties
+*.iml
+.gradle
+/local.properties
+/.idea/*
+.DS_Store
+/build/*
+/captures
+app/app.iml

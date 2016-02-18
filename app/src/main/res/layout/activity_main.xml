@@ -1,66 +1,25 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyActivity"
-    tools:ignore="MergeRootFrame">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-    <WebView
-        android:id="@+id/webView1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/adView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/spinner1"
-        android:orientation="vertical" >
+    <include
+        layout="@layout/app_bar_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
-    </WebView>
-
-    <ImageButton
-        android:id="@+id/settings"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@android:drawable/ic_menu_manage" android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"/>
-
-    <TextView
-        android:id="@+id/tv_promo"
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/settings"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:gravity="center"
-        android:text="@string/promo" android:textSize="12sp"/>
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/activity_main_drawer" />
 
-    <Spinner
-        android:id="@+id/spinner1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/settings" />
-    <ImageButton android:id="@+id/refreshButton" android:layout_width="40dp" android:layout_height="40dp"
-                 android:src="@android:drawable/stat_notify_sync"
-                 android:layout_alignParentTop="true" android:layout_toLeftOf="@+id/settings"
-                 android:contentDescription="@string/Refresh"/>
-    <ImageButton android:id="@+id/exportButton" android:layout_width="40dp" android:layout_height="40dp"
-                 android:src="@android:drawable/ic_menu_save"
-                 android:contentDescription="@string/Export"
-                 android:layout_alignParentTop="true" android:layout_toLeftOf="@+id/refreshButton"/>
-
-    <com.google.android.gms.ads.AdView
-            android:id="@+id/adView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            ads:adSize="BANNER"
-            ads:adUnitId="@string/banner_ad_unit_id"/>
-
-
-</RelativeLayout>
+</android.support.v4.widget.DrawerLayout>

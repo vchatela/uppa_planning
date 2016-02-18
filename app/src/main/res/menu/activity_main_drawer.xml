@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single"
+        android:id="@+id/menu_top">
+    <item android:title="Mon profil">
+        <menu>
+        <item
+            android:id="@+id/nav_promotion"
+            android:icon="@android:drawable/ic_menu_save"
+            android:title="Promotion" />
+        </menu>
+    </item>
+    </group>
+    <group android:checkableBehavior="single"
+        android:id="@+id/menu_middle">
+    <item android:title="Explorer">
+        <menu>
+            <item
+                android:id="@+id/nav_reload"
+                android:icon="@android:drawable/ic_menu_upload"
+                android:title="Recharger" />
+        </menu>
+    </item>
+    </group>
+    <group android:checkableBehavior="single"
+        android:id="@+id/menu_bottom">
+        <item android:title="Contact">
+            <menu>
+                <item
+                    android:id="@+id/nav_ask"
+                    android:icon="@android:drawable/ic_dialog_email"
+                    android:title="Contacter Moi" />
+            </menu>
+        </item>
+    </group>
+</menu>

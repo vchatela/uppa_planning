@@ -4,7 +4,12 @@ import android.content.Context;
 import android.util.Log;
 import android.webkit.WebView;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Created by valentinc on 16/09/2015.

@@ -1,6 +1,11 @@
 package net.valentinc.uppa.hyperplanning;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * Created by valentinc on 17/09/2015.
