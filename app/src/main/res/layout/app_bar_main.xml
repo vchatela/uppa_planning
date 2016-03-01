@@ -30,6 +30,6 @@
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="@dimen/fab_margin_b"
         android:layout_marginRight="@dimen/fab_margin_r"
-        android:src="@android:drawable/ic_menu_rotate" />
+        android:src="@mipmap/ic_menu_refresh" />
 
 </android.support.design.widget.CoordinatorLayout>

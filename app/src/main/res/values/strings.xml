@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Planning UPPA</string>
 
+    <string name="dialog_text">Prenez le temps de noter Planning UPPA. Merci de votre soutien !</string>
+    <string name="dontask">Non merci</string>
+    <string name="no">Plus tard</string>
+    <string name="rate">Noter !</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 

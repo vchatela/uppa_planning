@@ -61,6 +61,14 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        /*Rate the APP*/
+        new AppRater(this)
+                .setMinDays(7)
+                .setMinLaunches(7)
+                .setAppTitle("Aimez vous l'application ?")
+                .init();
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -203,15 +211,17 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_reload) {
             loadView(true);
         } else if (id == R.id.nav_ask) {
-            Snackbar.make(drawer, "Fonctionnalité à venir.", Snackbar.LENGTH_LONG)
+            /*Snackbar.make(drawer, "Fonctionnalité à venir.", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
+            */
 
-            /*final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-            emailIntent.setType("plain/text");
-            emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"valentin.chatelard@laposte.net"});
-            emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Contact From UppaPlanning");
-            emailIntent.putExtra(android.content.Intent.EXTRA_TEXT,"");
-            startActivity(Intent.createChooser(emailIntent,"Envoi en cours.."));*/
+            Intent i = new Intent(Intent.ACTION_SEND);
+            i.setType("message/rfc822");
+            //i.setData(Uri.parse("valentindu64230@gmail.com"));
+            i.putExtra(Intent.EXTRA_EMAIL, new String[] {"valentindu64230@gmail.com"});
+            i.putExtra(Intent.EXTRA_SUBJECT, "Application UPPA");
+            i.putExtra(Intent.EXTRA_TEXT, "");
+            startActivity(Intent.createChooser(i, "Send Email"));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
