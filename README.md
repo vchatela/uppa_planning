@@ -7,11 +7,12 @@ Planning for Université de Pau et des Pays de l'Adour
 
 https://github.com/vchatela/uppa_planning/releases
 
-![Screenshot](http://img4.hostingpics.net/pics/575797Screenshot2.png)
+![Screenshot](http://oi63.tinypic.com/357puvk.jpg)
 
 ## Updates
 * Definitely reviewed design of the APP
 * Corrected usage of cache
+* Functionality to contact me by mail directly
 
 ## Previous updates
 * Add **cache** functionalities to use the application without network
