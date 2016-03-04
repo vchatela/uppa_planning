@@ -1,13 +1,12 @@
 <resources>
     <string name="app_name">Planning UPPA</string>
 
-    <string name="dialog_text">Prenez le temps de noter Planning UPPA. Merci de votre soutien !</string>
-    <string name="dontask">Non merci</string>
-    <string name="no">Plus tard</string>
-    <string name="rate">Noter !</string>
+    <string name="dialog_text">Aimez vous l\'application ? Notez la :)</string>=
+    <string name="no">Non merci</string>
+    <string name="rate">Oui !</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Ouverture drawer</string>
+    <string name="navigation_drawer_close">Fermeture drawer</string>
 
     <string name="action_settings">A Propos</string>
 

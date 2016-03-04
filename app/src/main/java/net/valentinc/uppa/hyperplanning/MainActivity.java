@@ -221,7 +221,7 @@ public class MainActivity extends AppCompatActivity
             i.putExtra(Intent.EXTRA_EMAIL, new String[] {"valentindu64230@gmail.com"});
             i.putExtra(Intent.EXTRA_SUBJECT, "Application UPPA");
             i.putExtra(Intent.EXTRA_TEXT, "");
-            startActivity(Intent.createChooser(i, "Send Email"));
+            startActivity(Intent.createChooser(i, "Contacter moi par Mail"));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
