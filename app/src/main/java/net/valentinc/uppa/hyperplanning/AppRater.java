@@ -58,6 +58,8 @@ public class AppRater {
         builder.setNegativeButton(mContext.getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
+                editor.putBoolean(DONT_SHOW, true);
+                editor.commit();
                 dialog.dismiss();
             }
         });
@@ -76,6 +78,8 @@ public class AppRater {
         builder.setPositiveButton(mContext.getResources().getString(R.string.rate), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
+                editor.putBoolean(DONT_SHOW, true);
+                editor.commit();
                 mContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri
                         .parse("market://details?id=" + mAppPackageName)));
                 dialog.dismiss();

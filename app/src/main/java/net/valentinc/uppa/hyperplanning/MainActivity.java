@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity
         new AppRater(this)
                 .setMinDays(7)
                 .setMinLaunches(7)
-                .setAppTitle("Aimez vous l'application ?")
+                .setAppTitle("UPPA Planning")
                 .init();
 
         setContentView(R.layout.activity_main);
