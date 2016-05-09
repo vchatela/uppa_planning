@@ -1,0 +1,6 @@
+{
+  "name": "Uppa planning",
+  "tagline": "Planning for Université de Pau et des Pays de l'Adour",
+  "body": "# Planning UPPA \r\nMaster Release [![Build Status](https://travis-ci.org/vchatela/uppa_planning.svg?branch=master)](https://travis-ci.org/vchatela/uppa_planning)\r\n\r\nPlanning for Université de Pau et des Pays de l'Adour\r\n\r\n## New features / Release\r\n\r\nhttps://github.com/vchatela/uppa_planning/releases\r\n\r\n![Screenshot](http://oi63.tinypic.com/357puvk.jpg)\r\n\r\n## Updates\r\n* Definitely reviewed design of the APP\r\n* Corrected usage of cache\r\n* Functionality to contact me by mail directly\r\n\r\n## Previous updates\r\n* Add **cache** functionalities to use the application without network\r\n* Add **exportation** functionalities to keep the file as png file in the Documents folder\r\n* StartUp page\r\n\r\n## License\r\n\r\nCopyright 2015 ValentinC\r\n\r\n[Creative Common BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode)\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
