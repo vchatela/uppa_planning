@@ -64,17 +64,6 @@ public class AppRater {
             }
         });
 
-//        builder.setNeutralButton(mContext.getResources().getString(R.string.dontask), new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int id) {
-//                if (editor != null) {
-//                    editor.putBoolean(DONT_SHOW, true);
-//                    editor.commit();
-//                }
-//                dialog.dismiss();
-//            }
-//        });
-
         builder.setPositiveButton(mContext.getResources().getString(R.string.rate), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {

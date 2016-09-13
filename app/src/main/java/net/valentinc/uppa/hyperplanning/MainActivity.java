@@ -27,8 +27,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 
 import org.xml.sax.SAXException;
 
@@ -45,7 +43,6 @@ public class MainActivity extends AppCompatActivity
     public int progressBarStatus;
     public boolean connected = true;
     public Exception eTmp;
-    private AdView adView;
     private Spinner spPeriodes;
     private WebView webView;
     private Promotion thePromo;
@@ -53,7 +50,6 @@ public class MainActivity extends AppCompatActivity
     private ProgressDialog progressBar;
     private Handler progressBarHandler = new Handler();
     private ArrayList<Periode> periodeList;
-    private DrawerLayout drawer;
 
     private ErrorHandler errorHandler;
     private boolean first = false;
@@ -88,7 +84,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -97,15 +93,9 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //previous app
-        adView = (AdView) this.findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        adView.loadAd(adRequest);
-
         errorHandler = new ErrorHandler(this);
 
         this.spPeriodes = (Spinner) findViewById(R.id.spinner);
-        //this.bSettings = (ImageButton) findViewById(R.id.settings);
         this.webView = (WebView) findViewById(R.id.webView);
         this.webView.getSettings().setBuiltInZoomControls(true);
         this.webView.getSettings().setUseWideViewPort(true);
@@ -129,25 +119,16 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onPause() {
-        if (adView != null) {
-            adView.pause();
-        }
         super.onPause();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (adView != null) {
-            adView.resume();
-        }
     }
 
     @Override
     public void onDestroy() {
-        if (adView != null) {
-            adView.destroy();
-        }
         super.onDestroy();
     }
 
@@ -209,12 +190,9 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_promotion) {
             showSettingsDialog();
         } else if (id == R.id.nav_reload) {
+            Cache.clearCache(getApplicationContext());
             loadView(true);
         } else if (id == R.id.nav_ask) {
-            /*Snackbar.make(drawer, "Fonctionnalité à venir.", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-            */
-
             Intent i = new Intent(Intent.ACTION_SEND);
             i.setType("message/rfc822");
             //i.setData(Uri.parse("valentindu64230@gmail.com"));

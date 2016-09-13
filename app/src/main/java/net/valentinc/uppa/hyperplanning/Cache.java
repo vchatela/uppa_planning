@@ -65,4 +65,23 @@ public abstract class Cache {
         Log.i("INFO", "File exists : " + file.exists());
         return file.exists();
     }
+
+    public static void clearCache(Context context){
+        File cacheDir = context.getCacheDir();
+        for(File file:cacheDir.listFiles()){
+            String fileName = file.getName();
+            if(!fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length()).endsWith("png"))
+                continue;
+            try{
+                if(file.delete()){
+                    Log.d("CACHE",file.getName()+" deleted");
+                }else{
+                    Log.d("CACHE",file.getName()+" has not been correctly deleted");
+                }
+            }catch (Exception e){
+                Log.e("CACHE",e.getMessage());
+            }
+
+        }
+    }
 }
