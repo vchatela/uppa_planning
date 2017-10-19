@@ -73,14 +73,20 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Export.exportCurrentView(getApplicationContext(), ((Periode) spPeriodes.getSelectedItem()).getImageCode() + "." + Cache.extension.png) == 0) {
-                    Snackbar.make(view, "Planning enregistré sur le portable.", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                } else {
-                    Snackbar.make(view, "Erreur durant sauvegarde sur le portable.", Snackbar.LENGTH_LONG)
+                Periode selectedPeriod = (Periode) spPeriodes.getSelectedItem();
+                if (selectedPeriod != null) {
+                    if (Export.exportCurrentView(getApplicationContext(), selectedPeriod.getImageCode() +"." + Cache.extension.png) == 0) {
+                        Snackbar.make(view, "Planning enregistré dans la galerie.", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                    } else {
+                        Snackbar.make(view, "Erreur durant sauvegarde dans la galerie.", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                    }
+                }
+                else {
+                    Snackbar.make(view, "Choisissez une promotion avant de pouvoir recharger.", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
-
             }
         });
 
@@ -195,8 +201,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_ask) {
             Intent i = new Intent(Intent.ACTION_SEND);
             i.setType("message/rfc822");
-            //i.setData(Uri.parse("valentindu64230@gmail.com"));
-            i.putExtra(Intent.EXTRA_EMAIL, new String[] {"valentindu64230@gmail.com"});
+            i.putExtra(Intent.EXTRA_EMAIL, new String[] {"chatelard.valentin@gmail.com"});
             i.putExtra(Intent.EXTRA_SUBJECT, "Application UPPA");
             i.putExtra(Intent.EXTRA_TEXT, "");
             startActivity(Intent.createChooser(i, "Contacter moi par Mail"));

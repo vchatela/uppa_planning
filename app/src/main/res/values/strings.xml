@@ -10,8 +10,6 @@
 
     <string name="action_settings">A Propos</string>
 
-    <string name="banner_ad_unit_id">ca-app-pub-6079441999818020/8557100397</string>
-    <integer name="google_play_services_version">8115000</integer>
     <string name="menu_settings">Réglages</string>
     <string name="menu_exit">Quitter</string>
 
