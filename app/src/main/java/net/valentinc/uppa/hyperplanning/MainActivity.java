@@ -33,6 +33,7 @@ import org.xml.sax.SAXException;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity
     public static final String PREFS_NAME = "settings";
     public int progressBarStatus;
     public boolean connected = true;
+    public boolean http_error = false;
     public Exception eTmp;
     private Spinner spPeriodes;
     private WebView webView;
@@ -362,24 +364,43 @@ public class MainActivity extends AppCompatActivity
                 try {
                     assert url != null;
                     conn = (HttpURLConnection) url.openConnection();
-
+                    conn.setConnectTimeout(5000);
+                    conn.setReadTimeout(5000);
                     assert urlList != null;
+
                     connList = (HttpURLConnection) urlList.openConnection();
-                    if (conn.getResponseCode() != 200 || connList.getResponseCode() != 200) {
-                        eTmp = new ProxyException();
+                    connList.setConnectTimeout(5000);
+                    connList.setReadTimeout(5000);
+                    int conn_resp = -1, connList_resp = -1;
+                    try{
+                        conn_resp = conn.getResponseCode();
+                        connList_resp = connList.getResponseCode();
+                    } catch (java.net.SocketTimeoutException e) {
+                        http_error = true;
+                    }
+                    if (conn_resp != 200 || connList_resp != 200) {
                         connected = false;
+                        if (http_error)
+                            throw new HttpErrorException();
+
                         MainActivity.this.runOnUiThread(new Runnable() {
                             public void run() {
                                 setTheCurrentPeriode(false);
                             }
                         });
-                        return;
-                    } else connected = true;
+                    } else {
+                        connected = true;
+                    }
                 } catch (IOException e1) {
                     e1.printStackTrace();
                     connected = false;
+                } catch (HttpErrorException e){
+
                 }
                 try {
+                    if (http_error) {
+                        throw new HttpErrorException();
+                    }
                     if (connected) {
                         periodeList = MyXMLParser.getPromo(conn.getInputStream());
                         conn = (HttpURLConnection) url.openConnection();
@@ -400,7 +421,7 @@ public class MainActivity extends AppCompatActivity
                     if (periodeList == null || promoList == null)
                         throw new ProxyException();
 
-                } catch (SAXException | ProxyException | IOException e) {
+                } catch (SAXException | HttpErrorException | ProxyException | IOException e) {
                     eTmp = e;
                     MainActivity.this.runOnUiThread(new Runnable() {
                         public void run() {

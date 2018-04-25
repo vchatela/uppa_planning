@@ -11,7 +11,7 @@ import android.content.DialogInterface;
 public class ErrorHandler {
 	private final static String NET = "Connectivité réseau - Pensez a autoriser le cache.";
 	private final static String PROXY = "Impossible de récupérer le planning. Si vous étes sur un hot-spot Wifi, vérifiez que vous êtes bien identifié.";
-
+	private final static String HTTP = "Un incident est en cours sur un des serveurs. Veuillez revenir plus tard. Désolé";
 	private Activity context;
 
 	public ErrorHandler(Activity context) {
@@ -34,8 +34,9 @@ public class ErrorHandler {
 			alertDialogBuilder.setMessage(PROXY);
 		if (e instanceof ProxyException)
 			alertDialogBuilder.setMessage(PROXY);
-		
-		
+		if (e instanceof HttpErrorException)
+			alertDialogBuilder.setMessage(HTTP);
+
 		alertDialogBuilder.setCancelable(false);
 		alertDialogBuilder.setPositiveButton("Quiter",
 				new DialogInterface.OnClickListener() {
@@ -56,6 +57,10 @@ public class ErrorHandler {
 }
 class ProxyException extends Exception {
 	private static final long serialVersionUID = 1L;
+}
+
+class HttpErrorException extends Exception {
+
 }
 
 class CacheException extends Exception {
