@@ -61,34 +61,30 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         /*Rate the APP*/
-        new AppRater(this)
+        new AppRater(this, this)
                 .setMinDays(7)
                 .setMinLaunches(7)
                 .setAppTitle("UPPA Planning")
                 .init();
 
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Periode selectedPeriod = (Periode) spPeriodes.getSelectedItem();
-                if (selectedPeriod != null) {
-                    if (Export.exportCurrentView(getApplicationContext(), selectedPeriod.getImageCode() +"." + Cache.extension.png) == 0) {
-                        Snackbar.make(view, "Planning enregistré dans la galerie.", Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
-                    } else {
-                        Snackbar.make(view, "Erreur durant sauvegarde dans la galerie.", Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
-                    }
-                }
-                else {
-                    Snackbar.make(view, "Choisissez une promotion avant de pouvoir recharger.", Snackbar.LENGTH_LONG)
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(view -> {
+            Periode selectedPeriod = (Periode) spPeriodes.getSelectedItem();
+            if (selectedPeriod != null) {
+                if (Export.exportCurrentView(getApplicationContext(), selectedPeriod.getImageCode() + "." + Cache.extension.png) == 0) {
+                    Snackbar.make(view, "Planning enregistré dans la galerie.", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                } else {
+                    Snackbar.make(view, "Erreur durant sauvegarde dans la galerie.", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
+            } else {
+                Snackbar.make(view, "Choisissez une promotion avant de pouvoir recharger.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
             }
         });
 

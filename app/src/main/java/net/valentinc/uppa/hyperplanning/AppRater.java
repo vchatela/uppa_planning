@@ -3,26 +3,31 @@ package net.valentinc.uppa.hyperplanning;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
+
+import com.google.android.play.core.review.ReviewInfo;
+import com.google.android.play.core.review.ReviewManager;
+import com.google.android.play.core.review.ReviewManagerFactory;
+import com.google.android.play.core.tasks.Task;
 
 public class AppRater {
     private static String mAppTitle = "YOUR-APPLICATION-TITLE";
-    private static String mAppPackageName = "YOUR-PACKAGE-NAME";
+    private static String mAppPackageName;
 
     private final static String APP_RATER    = "apprater";
     private final static String DONT_SHOW    = "dontshowagain";
     private final static String LAUNCH_COUNT = "launch_count";
     private final static String FIRST_LAUNCH = "date_firstlaunch";
+    private final MainActivity mAct;
 
     private int daysUntilPrompt = 3;
     private int launchesUntilPrompt = 7;
 
     private static Context mContext;
 
-    public AppRater(Context context) {
+    public AppRater(Context context, MainActivity act) {
         this.mContext = context;
+        this.mAct = act;
         this.mAppPackageName = context.getPackageName();
     }
 
@@ -69,8 +74,23 @@ public class AppRater {
             public void onClick(DialogInterface dialog, int id) {
                 editor.putBoolean(DONT_SHOW, true);
                 editor.commit();
-                mContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri
-                        .parse("market://details?id=" + mAppPackageName)));
+                ReviewManager manager = ReviewManagerFactory.create(mContext);
+                Task<ReviewInfo> request = manager.requestReviewFlow();
+                request.addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // We can get the ReviewInfo object
+                        ReviewInfo reviewInfo = task.getResult();
+                        Task<Void> flow = manager.launchReviewFlow(mAct, reviewInfo);
+                        flow.addOnCompleteListener(task2 -> {
+                            // The flow has finished. The API does not indicate whether the user
+                            // reviewed or not, or even whether the review dialog was shown. Thus, no
+                            // matter the result, we continue our app flow.
+                        });
+                    } else {
+                        // There was some problem, continue regardless of the result.
+                    }
+                });
+
                 dialog.dismiss();
             }
         });
