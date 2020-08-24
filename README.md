@@ -2,12 +2,10 @@
 Master Release [![Build Status](https://travis-ci.org/vchatela/uppa_planning.svg?branch=master)](https://travis-ci.org/vchatela/uppa_planning)
 
 Planning for Université de Pau et des Pays de l'Adour
+[Lien Play Store](https://play.google.com/store/apps/details?id=net.valentinc.uppa.hyperplanning&hl=fr_CH)
 
 ## New features / Release
-
 https://github.com/vchatela/uppa_planning/releases
-
-![Screenshot](http://oi63.tinypic.com/357puvk.jpg)
 
 ## Updates
 * Definitely reviewed design of the APP
