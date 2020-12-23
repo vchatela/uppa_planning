@@ -1,3 +1,6 @@
+Projet abandonné après 3 ans suite à la restriction d'accès au planning par l'UPPA.
+Le planning n'étant plus publique et n'ayant pas accès à la nouvelle version je ne peux effectuer les modifications.
+
 # Planning UPPA 
 Master Release [![Build Status](https://travis-ci.org/vchatela/uppa_planning.svg?branch=master)](https://travis-ci.org/vchatela/uppa_planning)
 
